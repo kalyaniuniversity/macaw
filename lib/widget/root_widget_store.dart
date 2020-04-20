@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:macaw/presentation/swan_icons.dart';
 import 'package:macaw/service/constant.dart';
+import 'package:macaw/service/macaw_palette.dart';
 import 'package:macaw/service/macaw_state_management.dart';
 import 'package:macaw/service/widget_service.dart';
 import 'package:macaw/widget/covid_india_widget_store.dart';
@@ -46,6 +47,12 @@ class RootWidgetStore {
 	Widget getBottomNavigationBar(BuildContext context) {
 		return BottomNavigationBar(
 			items:  _widgetService.buildBottomNavigationBarItems(RootWidgetStore._bottomNavigationItems),
+			selectedItemColor: MacawPalette.darkYellow,
+			unselectedItemColor: MacawPalette.primaryColor,
+			currentIndex: MacawStateManagement.currentViewFragment,
+			showSelectedLabels: true,
+			showUnselectedLabels: true,
+			type: BottomNavigationBarType.fixed,
 			onTap: (index) => this._onBottomNavigationBarItemTapped(context, index),
 		);
 	}

@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:macaw/model/covid_india_state.dart';
 import 'package:macaw/service/constant.dart';
 import 'package:macaw/service/macaw_palette.dart';
@@ -38,8 +37,8 @@ class CovidIndiaWidgetStore {
 	Widget _listViewSeparatorBuilder(BuildContext context, int index) {
 		switch(index) {
 			case 0:
-			case 1: return this._buildNoDivider();
-			default: return this._buildDivider();
+			case 1: return this._macawWidgetStore.buildNoDivider(Colors.white70);
+			default: return this._macawWidgetStore.buildDivider(MacawPalette.greyTintB);
 		}
 	}
 	
@@ -52,111 +51,24 @@ class CovidIndiaWidgetStore {
 		}
 	}
 
-	Widget _buildNoDivider() {
-		return Divider(
-			color: Colors.white70,
-			thickness: 0.0,
-		);
-	}
-
-	Widget _buildDivider() {
-		return Divider(
-			color: MacawPalette.greyTintB,
-			indent: 30.0,
-			endIndent: 30.0,
-			thickness: 3.0,
-		);
-	}
-
 	Widget _buildHeaderWidgetView() {
 		return _macawWidgetStore.buildFragmentHeader(Constant.INDIA);
 	}
 
 	Widget _buildNotifierPanelWidgetView() {
-		return MacawStateManagement.isAllDataLoaded() ? this._buildDateNotifierWidgetView() : this._buildProgressIndicatorWidgetView();
-	}
-
-	Widget _buildDateNotifierWidgetView() {
-		return Container(
-			margin: const EdgeInsets.only(
-				left: 4.0,
-				right: 4.0
-			),
-			padding: const EdgeInsets.all(8.0),
-			decoration: BoxDecoration(
-
-			),
-			child: RichText(
-				text: TextSpan(
-					children: <TextSpan>[
-						TextSpan(
-							text: "INDIA'S COVID-19 REPORTED CASES AS OF ",
-							style: GoogleFonts.changa(
-								textStyle: TextStyle(
-									color: Colors.black54,
-									fontSize: 14.0
-								)
-							)
-						),
-						TextSpan(
-							text: CovidIndiaState.latestDate,
-							style: GoogleFonts.changa(
-								textStyle: TextStyle(
-									color: MacawPalette.accentColor,
-									fontSize: 16.0,
-									fontWeight: FontWeight.bold
-								)
-							)
-						),
-						TextSpan(
-							text: " (MM/DD/YYYY)",
-							style: GoogleFonts.changa(
-								textStyle: TextStyle(
-									color: Colors.black54,
-									fontSize: 14.0
-								)
-							)
-						)
-					]
-				),
-			),
-		);
-	}
-
-	Widget _buildProgressIndicatorWidgetView() {
-		return Container(
-			child: LinearProgressIndicator(
-				backgroundColor: MacawPalette.greyTintC
-			),
-		);
+		return MacawStateManagement.isAllDataLoaded() ? this._macawWidgetStore.buildDateNotifierWidgetView(Constant.INDIA.toUpperCase(), CovidIndiaState.latestDate) : this._macawWidgetStore.buildProgressIndicatorWidgetView();
 	}
 
 	Widget _buildRowOneWidgetView() {
-		return this._buildInfoRowView([this._buildTotalInfectedQuickInfo(), this._buildMostInfectedRegionQuickInfo()]);
+		return this._macawWidgetStore.buildInfoRowView([this._buildTotalInfectedQuickInfo(), this._buildMostInfectedRegionQuickInfo()]);
 	}
 
 	Widget _buildRowTwoWidgetView() {
-		return this._buildInfoRowView([this._buildTotalRecoveredQuickInfo(), this._buildMostRecoveredRegionQuickInfo()]);
+		return this._macawWidgetStore.buildInfoRowView([this._buildTotalRecoveredQuickInfo(), this._buildMostRecoveredRegionQuickInfo()]);
 	}
 
 	Widget _buildRowThreeWidgetView() {
-		return this._buildInfoRowView([this._buildTotalDeceasedQuickInfo(), this._buildMostDeceasedRegionQuickInfo()]);
-	}
-
-	Widget _buildInfoRowView(List<Widget> widgets) {
-		return Row(
-			children: <Widget>[
-				Expanded(
-					child: widgets[0]
-				),
-				SizedBox(
-					width: 8.0
-				),
-				Expanded(
-					child: widgets[1]
-				)
-			],
-		);
+		return this._macawWidgetStore.buildInfoRowView([this._buildTotalDeceasedQuickInfo(), this._buildMostDeceasedRegionQuickInfo()]);
 	}
 
 	Widget _buildTotalInfectedQuickInfo() {
@@ -207,7 +119,7 @@ class CovidIndiaWidgetStore {
 		return this._macawWidgetStore.buildQuickInfo(QuickInfo(
 			Constant.TOTAL_DECEASED,
 			Workhorse.numberFormat.format(CovidIndiaState.totalDeceased),
-			Constant.SKULL_EMOJI,
+			Constant.SLIGHT_FROWNING_EMOJI,
 			'+' + Workhorse.numberFormat.format(CovidIndiaState.deceasedCountIncrease),
 			QuickInfoStyle.dangerStyle,
 			QuickInfoStyle.dangerExtraInfo

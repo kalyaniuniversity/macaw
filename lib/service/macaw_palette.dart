@@ -24,6 +24,7 @@ class MacawPalette {
 	static const Color accentColor = const Color(MacawPalette._colorWatermelonRed);
 
 	static const Color darkBlue = const Color(MacawPalette._colorDarkBlue);
+	static const Color darkYellow = const Color(MacawPalette._colorDarkYellow);
 	static const Color green = const Color(MacawPalette._colorGreen);
 	static const Color mudGold = const Color(MacawPalette._colorMudGold);
 

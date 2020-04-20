@@ -3,8 +3,8 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:macaw/model/data_manager.dart';
 import 'package:macaw/service/constant.dart';
 import 'package:macaw/service/macaw_palette.dart';
+import 'package:macaw/service/macaw_state_management.dart';
 import 'package:macaw/widget/quick_info.dart';
-import 'package:macaw/widget/quick_info_style.dart';
 
 class MacawWidgetStore {
 
@@ -32,6 +32,93 @@ class MacawWidgetStore {
 
 	Widget buildQuickInfo(QuickInfo quickInfo, { bool isNeutral = false }) {
 		return isNeutral ? this._buildNeutralQuickInfo(quickInfo) : this._buildBiasedQuickInfo(quickInfo);
+	}
+
+	Widget buildNoDivider(Color color) {
+		return Divider(
+			color: color,
+			thickness: 0.0,
+		);
+	}
+
+	Widget buildDivider(Color color) {
+		return Divider(
+			color: color,
+			indent: 30.0,
+			endIndent: 30.0,
+			thickness: 3.0,
+		);
+	}
+
+	Widget buildDateNotifierWidgetView(String viewSubject, String date) {
+		return Container(
+			margin: const EdgeInsets.only(
+				left: 4.0,
+				right: 4.0
+			),
+			padding: const EdgeInsets.all(8.0),
+			decoration: BoxDecoration(
+
+			),
+			child: RichText(
+				text: TextSpan(
+					children: <TextSpan>[
+						TextSpan(
+							text: "DATA AS OF ",
+							style: GoogleFonts.changa(
+								textStyle: TextStyle(
+									color: Colors.black54,
+									fontSize: 14.0,
+								)
+							)
+						),
+						TextSpan(
+							text: date,
+							style: GoogleFonts.changa(
+								textStyle: TextStyle(
+									color: MacawPalette.accentColor,
+									fontSize: 16.0,
+									fontWeight: FontWeight.bold
+								)
+							)
+						),
+						TextSpan(
+							text: " (MM/DD/YYYY)",
+							style: GoogleFonts.changa(
+								textStyle: TextStyle(
+									color: Colors.black54,
+									fontSize: 14.0
+								)
+							)
+						)
+					]
+				),
+			),
+		);
+	}
+
+	Widget buildProgressIndicatorWidgetView() {
+		return Container(
+			child: LinearProgressIndicator(
+				backgroundColor: MacawPalette.greyTintC
+			),
+		);
+	}
+
+	Widget buildInfoRowView(List<Widget> widgets) {
+		return Row(
+			children: <Widget>[
+				Expanded(
+					child: widgets[0]
+				),
+				SizedBox(
+					width: 8.0
+				),
+				Expanded(
+					child: widgets[1]
+				)
+			],
+		);
 	}
 
 	Widget buildDefaultNetworkErrorDialog(BuildContext context) {
@@ -126,6 +213,7 @@ class MacawWidgetStore {
 				FlatButton(
 					child: Text(Constant.TRY_AGAIN),
 					onPressed: () {
+						MacawStateManagement.isInitialDataLoaded = true;
 						Navigator.of(context).pop();
 						DataManager.loadData(callerContext);
 					},

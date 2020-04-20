@@ -11,13 +11,16 @@ class Constant {
 	static const String REGION_WITH_HIGHEST_INFECTION = "Region with Highest Infection";
 	static const String REGION_WITH_HIGHEST_RECOVERY = "Region with Highest Recovery";
 	static const String REGION_WITH_HIGHEST_DECEASED = "Region with Highest Deceased";
+	static const String COUNTRY_WITH_HIGHEST_INFECTION = "Country with Highest Infection";
+	static const String COUNTRY_WITH_HIGHEST_RECOVERY = "Country with Highest Recovery";
+	static const String COUNTRY_WITH_HIGHEST_DECEASED = "Country with Highest Deceased";
 
 	static const String FACE_MASK_EMOJI = "😷";
 	static const String SKULL_EMOJI = "☠️";
 	static const String FACE_SUNGLASS_EMOJI = "😎";
-//	static const String FACE_MASK_EMOJI = "😷";
-//	static const String FACE_MASK_EMOJI = "😷";
-//	static const String FACE_MASK_EMOJI = "😷";
+	static const String ALIEN_MONSTER_EMOJI = "👾";
+	static const String VICTORY_HAND_EMOJI = "✌️";
+	static const String SLIGHT_FROWNING_EMOJI = "🙁";
 
 
 	static const int VIEW_FRAGMENT_COVID_INDIA = 0;
@@ -26,10 +29,16 @@ class Constant {
 	static const String INDIA_CONFIRMED_CASES_DATASET_URL = "https://raw.githubusercontent.com/kalyaniuniversity/COVID-19-Datasets/master/India%20Statewise%20Confirmed%20Cases/COVID19_INDIA_STATEWISE_TIME_SERIES_CONFIRMED.csv";
 	static const String INDIA_RECOVERY_CASES_DATASET_URL = "https://raw.githubusercontent.com/kalyaniuniversity/COVID-19-Datasets/master/India%20Statewise%20Recovery%20Cases/COVID19_INDIA_STATEWISE_TIME_SERIES_RECOVERY.csv";
 	static const String INDIA_DECEASED_CASES_DATASET_URL = "https://raw.githubusercontent.com/kalyaniuniversity/COVID-19-Datasets/master/India%20Statewise%20Death%20Cases/COVID19_INDIA_STATEWISE_TIME_SERIES_DEATH.csv";
+	static const String WORLD_CONFIRMED_CASES_DATASET_URL = "https://raw.githubusercontent.com/CSSEGISandData/COVID-19/master/csse_covid_19_data/csse_covid_19_time_series/time_series_covid19_confirmed_global.csv";
+	static const String WORLD_RECOVERY_CASES_DATASET_URL = "https://raw.githubusercontent.com/CSSEGISandData/COVID-19/master/csse_covid_19_data/csse_covid_19_time_series/time_series_covid19_recovered_global.csv";
+	static const String WORLD_DECEASED_CASES_DATASET_URL = "https://raw.githubusercontent.com/CSSEGISandData/COVID-19/master/csse_covid_19_data/csse_covid_19_time_series/time_series_covid19_deaths_global.csv";
 
 	static const String INDIA_CONFIRMED_DATALOAD_FAILURE_MESSAGE = "The data for India's COVID-19 confirmed cases could not be loaded. This could be due to an internet connection failure or the server may not be available now.";
 	static const String INDIA_RECOVERY_DATALOAD_FAILURE_MESSAGE = "The data for India's COVID-19 recovery cases could not be loaded. This could be due to an internet connection failure or the server may not be available now.";
 	static const String INDIA_DECEASED_DATALOAD_FAILURE_MESSAGE = "The data for India's COVID-19 deceased cases could not be loaded. This could be due to an internet connection failure or the server may not be available now.";
+	static const String WORLD_CONFIRMED_DATALOAD_FAILURE_MESSAGE = "The data for World's COVID-19 confirmed cases could not be loaded. This could be due to an internet connection failure or the server may not be available now.";
+	static const String WORLD_RECOVERY_DATALOAD_FAILURE_MESSAGE = "The data for World's COVID-19 recovery cases could not be loaded. This could be due to an internet connection failure or the server may not be available now.";
+	static const String WORLD_DECEASED_DATALOAD_FAILURE_MESSAGE = "The data for World's COVID-19 deceased cases could not be loaded. This could be due to an internet connection failure or the server may not be available now.";
 	static const String NETWORK_FAILURE_MESSAGE = "A network failure occured. Please check if you have an active internet connection, or the remote server may be inaccessible. Try after sometime.";
 	static const String NETWORK_FAILURE_MESSAGE_SHORT = "We failed to fetch information from the internet.";
 }

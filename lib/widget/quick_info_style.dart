@@ -19,6 +19,14 @@ class QuickInfoStyle {
 		height: 2.0
 	);
 
+	static const TextStyle positiveStyleSmallFont = TextStyle(
+		color: MacawPalette.green,
+		fontSize: 21.0,
+		fontWeight: FontWeight.bold,
+		letterSpacing: 1.0,
+		height: 2.0
+	);
+
 	static const TextStyle warningStyle = TextStyle(
 		color: MacawPalette.redTintB,
 		fontSize: 28.0,
@@ -27,9 +35,25 @@ class QuickInfoStyle {
 		height: 2.0
 	);
 
+	static const TextStyle warningStyleSmallFont = TextStyle(
+		color: MacawPalette.redTintB,
+		fontSize: 21.0,
+		fontWeight: FontWeight.bold,
+		letterSpacing: 1.0,
+		height: 2.0
+	);
+
 	static const TextStyle dangerStyle = TextStyle(
 		color: MacawPalette.mudGold,
 		fontSize: 28.0,
+		fontWeight: FontWeight.bold,
+		letterSpacing: 1.0,
+		height: 2.0
+	);
+
+	static const TextStyle dangerStyleSmallFont = TextStyle(
+		color: MacawPalette.mudGold,
+		fontSize: 21.0,
 		fontWeight: FontWeight.bold,
 		letterSpacing: 1.0,
 		height: 2.0

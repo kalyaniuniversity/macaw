@@ -1,6 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:macaw/service/workhorse.dart';
-import 'package:macaw/widget/quick_info_style.dart';
 
 class QuickInfo {
 

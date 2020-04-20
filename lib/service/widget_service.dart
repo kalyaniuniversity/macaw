@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
+import 'package:macaw/service/macaw_palette.dart';
 import 'package:macaw/widget/macaw_bottom_navigation_item.dart';
 
 class WidgetService {
@@ -31,7 +33,11 @@ class WidgetService {
 	BottomNavigationBarItem _buildBottomNavigationBarItem(IconData iconData, String title) {
 		return BottomNavigationBarItem(
 			icon: Icon(iconData),
-			title: Text(title)
+			title: Text(
+				title,
+				style: GoogleFonts.changa(),
+			),
+			backgroundColor: MacawPalette.darkYellow
 		);
 	}
 }
