@@ -10,6 +10,7 @@ class MacawWidgetStore {
 
 	Widget buildFragmentHeader(String title) {
 		return Container(
+			margin: const EdgeInsets.only(top: 15.0),
 			child: Column(
 				crossAxisAlignment: CrossAxisAlignment.end,
 				mainAxisAlignment: MainAxisAlignment.end,
@@ -98,9 +99,9 @@ class MacawWidgetStore {
 	}
 
 	Widget buildProgressIndicatorWidgetView() {
-		return Container(
-			child: LinearProgressIndicator(
-				backgroundColor: MacawPalette.greyTintC
+		return Center(
+			child: CircularProgressIndicator(
+				strokeWidth: 2.0,
 			),
 		);
 	}

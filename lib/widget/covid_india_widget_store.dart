@@ -45,8 +45,8 @@ class CovidIndiaWidgetStore {
 	EdgeInsetsGeometry _getListItemPadding(int index) {
 		switch(index) {
 			case 0: return EdgeInsets.only(top: 18.0, left: 10.0, right: 15.0);
-			case 1: return EdgeInsets.only(left: 5.0, right: 5.0);
-			case 2: return EdgeInsets.only(top: 2.0, left: 15.0, right: 15.0, bottom: 15.0);
+			case 1: return EdgeInsets.only(left: 5.0, right: 5.0, top: 0.0, bottom: 0.0);
+			case 2: return EdgeInsets.only(top: 0.0, left: 15.0, right: 15.0, bottom: 15.0);
 			default: return EdgeInsets.all(15.0);
 		}
 	}

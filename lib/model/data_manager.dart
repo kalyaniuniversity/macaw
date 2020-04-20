@@ -36,7 +36,17 @@ class DataManager {
 		}
 	}
 
-	static void _prepareCovidIndiaData(BuildContext context) {
+	static void refreshData(BuildContext context) {
+
+		MacawStateManagement.isInitialDataLoaded = false;
+		MacawStateManagement.isIndiaLatestDateLoaded = false;
+		MacawStateManagement.isWorldLatestDateLoaded = false;
+
+		MacawStateManagement.appViewFragmentStateChangeCallback(MacawStateManagement.currentViewFragment);
+		DataManager.loadData(context);
+	}
+
+	static void _prepareCovidIndiaData(BuildContext context) async {
 
 		DataManager._prepareIndiaConfirmedData(context);
 		DataManager._prepareIndiaRecoveredData(context);

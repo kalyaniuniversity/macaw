@@ -1,11 +1,13 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
+import 'package:macaw/model/data_manager.dart';
 import 'package:macaw/presentation/swan_icons.dart';
 import 'package:macaw/service/constant.dart';
 import 'package:macaw/service/macaw_palette.dart';
 import 'package:macaw/service/macaw_state_management.dart';
-import 'package:macaw/service/widget_service.dart';
 import 'package:macaw/widget/covid_india_widget_store.dart';
+import 'package:macaw/widget/covid_map_widget_store.dart';
 import 'package:macaw/widget/covid_world_widget_store.dart';
 import 'package:macaw/widget/macaw_bottom_navigation_item.dart';
 
@@ -15,38 +17,34 @@ class RootWidgetStore {
 		"Datasets",
 		"News",
 		"About",
-		"How You Can Help"
+		"How You Can Help",
+		"Refresh"
 	];
 
 	static final List<MacawBottomNavigationItem> _bottomNavigationItems = [
 		MacawBottomNavigationItem(SwanIcons.india, Constant.INDIA),
-		MacawBottomNavigationItem(SwanIcons.globe, Constant.WORLD)
+		MacawBottomNavigationItem(SwanIcons.globe, Constant.WORLD),
+		MacawBottomNavigationItem(Icons.location_on, Constant.MAP)
 	];
 
 	CovidIndiaWidgetStore _covidIndiaWidgetStore = CovidIndiaWidgetStore();
 	CovidWorldWidgetStore _covidWorldWidgetStore = CovidWorldWidgetStore();
-	WidgetService _widgetService = WidgetService();
+	CovidMapWidgetStore _covidMapWidgetStore = CovidMapWidgetStore();
 
 	Widget buildMacawViewFragment(BuildContext context) {
 
 		switch(MacawStateManagement.currentViewFragment) {
 			case Constant.VIEW_FRAGMENT_COVID_INDIA: return this._covidIndiaWidgetStore.getView(context);
 			case Constant.VIEW_FRAGMENT_COVID_WORLD: return this._covidWorldWidgetStore.getView(context);
+			case Constant.VIEW_FRAGMENT_MAP: return this._covidMapWidgetStore.getView(context);
 
 			default: return null;
 		}
 	}
 
-	Widget getFloatingActionButton() {
-		return FloatingActionButton(
-			child: this._getPopupMenuButton(),
-			foregroundColor: Colors.white
-		);
-	}
-
 	Widget getBottomNavigationBar(BuildContext context) {
 		return BottomNavigationBar(
-			items:  _widgetService.buildBottomNavigationBarItems(RootWidgetStore._bottomNavigationItems),
+			items:  this.buildBottomNavigationBarItems(context),
 			selectedItemColor: MacawPalette.darkYellow,
 			unselectedItemColor: MacawPalette.primaryColor,
 			currentIndex: MacawStateManagement.currentViewFragment,
@@ -57,16 +55,75 @@ class RootWidgetStore {
 		);
 	}
 
-	Widget _getPopupMenuButton() {
-		return PopupMenuButton(
-			itemBuilder: (context) => this._widgetService.buildPopupMenu(context, RootWidgetStore._extraOptionsTexts),
-			icon: Icon(Icons.menu),
-			captureInheritedThemes: true,
-			enabled: true,
+	List<BottomNavigationBarItem> buildBottomNavigationBarItems(BuildContext context) {
+
+		List<BottomNavigationBarItem> navigationItems = List<BottomNavigationBarItem>();
+
+		RootWidgetStore._bottomNavigationItems.forEach((item) => [
+			navigationItems.add(this._buildBottomNavigationBarItem(item.getIconData(), item.getTitle()))
+		]);
+
+		navigationItems.add(this._buildBottomNavigationBarItemPopupOptions(context));
+
+		return navigationItems;
+	}
+
+	BottomNavigationBarItem _buildBottomNavigationBarItem(IconData iconData, String title) {
+		return BottomNavigationBarItem(
+			icon: Icon(iconData),
+			title: Text(
+				title,
+				style: GoogleFonts.changa(),
+			),
+			backgroundColor: MacawPalette.darkYellow
 		);
 	}
 
+	BottomNavigationBarItem _buildBottomNavigationBarItemPopupOptions(BuildContext context) {
+		return BottomNavigationBarItem(
+			icon: this._getPopupMenuButton(context),
+			title: Text(
+				Constant.MORE,
+				style: GoogleFonts.changa(),
+			),
+			backgroundColor: MacawPalette.darkYellow
+		);
+	}
+
+	Widget _getPopupMenuButton(BuildContext context) {
+		return PopupMenuButton(
+			itemBuilder: (ctx) => this.buildPopupMenu(ctx),
+			icon: Icon(Icons.short_text),
+			captureInheritedThemes: true,
+			enabled: true,
+			onSelected: (value) {
+				this._popupMenuItemSelected(context, value);
+			},
+		);
+	}
+
+	List<PopupMenuEntry<int>> buildPopupMenu(BuildContext context) {
+
+		List<PopupMenuEntry<int>> list = List<PopupMenuEntry<int>>();
+
+		for(int i = 0; i < RootWidgetStore._extraOptionsTexts.length; i++) list.add(
+			PopupMenuItem(
+				child: Text(RootWidgetStore._extraOptionsTexts[i]),
+				value: i
+			)
+		);
+
+		return list;
+	}
+
+	void _popupMenuItemSelected(BuildContext context, int index) {
+		switch(index) {
+			case 4: DataManager.refreshData(context); break;
+		}
+	}
+
 	void _onBottomNavigationBarItemTapped(BuildContext context, int index) {
-		MacawStateManagement.appViewFragmentStateChangeCallback(index);
+		if(index == 3) return;
+		else MacawStateManagement.appViewFragmentStateChangeCallback(index);
 	}
 }
