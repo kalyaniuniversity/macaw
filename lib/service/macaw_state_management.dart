@@ -1,3 +1,4 @@
+import 'package:flutter/material.dart';
 import 'package:macaw/service/constant.dart';
 
 class MacawStateManagement {
@@ -28,6 +29,8 @@ class MacawStateManagement {
 	static bool isWorldDeceasedCountIncreaseLoaded = false;
 
 	static int currentViewFragment = Constant.VIEW_FRAGMENT_COVID_INDIA;
+
+	static GlobalKey<ScaffoldState> rootScaffoldKey = GlobalKey<ScaffoldState>();
 
 	static var appViewFragmentStateChangeCallback;
 

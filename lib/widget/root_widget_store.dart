@@ -116,14 +116,40 @@ class RootWidgetStore {
 		return list;
 	}
 
-	void _popupMenuItemSelected(BuildContext context, int index) {
+	Future<void> _popupMenuItemSelected(BuildContext context, int index) async {
 		switch(index) {
-			case 4: DataManager.refreshData(context); break;
+			case 4:
+
+				await DataManager.refreshData(context);
+				MacawStateManagement.rootScaffoldKey.currentState.showSnackBar(this._buildManualRefreshCompleteSnackBar());
+
+//				Scaffold.of(context).showSnackBar(snackbar);
+
+				break;
 		}
 	}
 
 	void _onBottomNavigationBarItemTapped(BuildContext context, int index) {
 		if(index == 3) return;
 		else MacawStateManagement.appViewFragmentStateChangeCallback(index);
+	}
+
+	SnackBar _buildManualRefreshCompleteSnackBar() {
+		return SnackBar(
+			elevation: 5.0,
+			duration: Duration(seconds: 5),
+			backgroundColor: MacawPalette.darkBlue,
+			behavior: SnackBarBehavior.floating,
+			content: Text(
+				Constant.MANUAL_REFRESH_SNACKBAR_MESSAGE,
+				style: GoogleFonts.changa(),
+			),
+			action: SnackBarAction(
+				label: Constant.OKAY,
+				onPressed: () {
+					MacawStateManagement.rootScaffoldKey.currentState.hideCurrentSnackBar();
+				}
+			),
+		);
 	}
 }

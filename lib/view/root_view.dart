@@ -16,6 +16,7 @@ class RootView implements IMacawView {
 	Widget getView(BuildContext context) {
 
 		return Scaffold(
+			key: MacawStateManagement.rootScaffoldKey,
 			bottomNavigationBar: _widgetStore.getBottomNavigationBar(context),
 			body: SmartRefresher(
 				enablePullDown: true,
@@ -35,7 +36,7 @@ class RootView implements IMacawView {
 
 		if(!MacawStateManagement.rootStateManaged || !MacawStateManagement.isInitialDataLoaded) return;
 
-		DataManager.refreshData(context);
+		await DataManager.refreshData(context);
 		_pulldownRefreshController.refreshCompleted();
 	}
 

@@ -25,42 +25,42 @@ class DataManager {
 
 	static MacawWidgetStore _widgetStore = MacawWidgetStore();
 
-	static void loadData(BuildContext context) {
+	static Future<void> loadData(BuildContext context) async {
 
 		if(!MacawStateManagement.isInitialDataLoaded) {
 
-			DataManager._prepareCovidIndiaData(context);
-			DataManager._prepareCovidWorldData(context);
+			await DataManager._prepareCovidIndiaData(context);
+			await DataManager._prepareCovidWorldData(context);
 
 			MacawStateManagement.isInitialDataLoaded = true;
 		}
 	}
 
-	static void refreshData(BuildContext context) {
+	static Future<void> refreshData(BuildContext context) async {
 
 		MacawStateManagement.isInitialDataLoaded = false;
 		MacawStateManagement.isIndiaLatestDateLoaded = false;
 		MacawStateManagement.isWorldLatestDateLoaded = false;
 
 		MacawStateManagement.appViewFragmentStateChangeCallback(MacawStateManagement.currentViewFragment);
-		DataManager.loadData(context);
+		await DataManager.loadData(context);
 	}
 
-	static void _prepareCovidIndiaData(BuildContext context) async {
+	static Future<void> _prepareCovidIndiaData(BuildContext context) async {
 
 		DataManager._prepareIndiaConfirmedData(context);
 		DataManager._prepareIndiaRecoveredData(context);
 		DataManager._prepareIndiaDeceasedData(context);
 	}
 
-	static void _prepareCovidWorldData(BuildContext context) {
+	static Future<void> _prepareCovidWorldData(BuildContext context) async {
 
 		DataManager._prepareWorldConfirmedData(context);
 		DataManager._prepareWorldRecoveredData(context);
 		DataManager._prepareWorldDeceasedData(context);
 	}
 
-	static void _prepareIndiaConfirmedData(BuildContext context) async {
+	static Future<void> _prepareIndiaConfirmedData(BuildContext context) async {
 		DataManager._prepareCovidData(
 			context: context,
 			url: Constant.INDIA_CONFIRMED_CASES_DATASET_URL,
@@ -71,7 +71,7 @@ class DataManager {
 		);
 	}
 
-	static void _prepareIndiaRecoveredData(BuildContext context) async {
+	static Future<void> _prepareIndiaRecoveredData(BuildContext context) async {
 		DataManager._prepareCovidData(
 			context: context,
 			url: Constant.INDIA_RECOVERY_CASES_DATASET_URL,
@@ -82,7 +82,7 @@ class DataManager {
 		);
 	}
 
-	static void _prepareIndiaDeceasedData(BuildContext context) async {
+	static Future<void> _prepareIndiaDeceasedData(BuildContext context) async {
 		DataManager._prepareCovidData(
 			context: context,
 			url: Constant.INDIA_DECEASED_CASES_DATASET_URL,
@@ -93,7 +93,7 @@ class DataManager {
 		);
 	}
 
-	static void _prepareWorldConfirmedData(BuildContext context) async {
+	static Future<void> _prepareWorldConfirmedData(BuildContext context) async {
 		DataManager._prepareCovidData(
 			context: context,
 			url: Constant.WORLD_CONFIRMED_CASES_DATASET_URL,
@@ -104,7 +104,7 @@ class DataManager {
 		);
 	}
 
-	static void _prepareWorldRecoveredData(BuildContext context) async {
+	static Future<void> _prepareWorldRecoveredData(BuildContext context) async {
 		DataManager._prepareCovidData(
 			context: context,
 			url: Constant.WORLD_RECOVERY_CASES_DATASET_URL,
@@ -115,7 +115,7 @@ class DataManager {
 		);
 	}
 
-	static void _prepareWorldDeceasedData(BuildContext context) async {
+	static Future<void> _prepareWorldDeceasedData(BuildContext context) async {
 		DataManager._prepareCovidData(
 			context: context,
 			url: Constant.WORLD_DECEASED_CASES_DATASET_URL,
@@ -126,7 +126,7 @@ class DataManager {
 		);
 	}
 
-	static void _prepareCovidData({ @required BuildContext context,
+	static Future<void> _prepareCovidData({ @required BuildContext context,
 		@required String url,
 		@required String failureMessage,
 		@required CovidData covidData,
@@ -159,7 +159,7 @@ class DataManager {
 		dataManagerCallback();
 	}
 
-	static void _prepareCovidIndiaDataObject(List<List<dynamic>> rowsAsListOfValues, CovidData covidData) {
+	static Future<void> _prepareCovidIndiaDataObject(List<List<dynamic>> rowsAsListOfValues, CovidData covidData) async {
 
 		Country india = Country(Constant.INDIA);
 		covidData.headers = rowsAsListOfValues[0].cast<String>().toList();
@@ -189,7 +189,7 @@ class DataManager {
 		covidData.addCountry(india);
 	}
 
-	static void _prepareCovidWorldDataObject(List<List<dynamic>> rowsAsListOfValues, CovidData covidData) {
+	static Future<void> _prepareCovidWorldDataObject(List<List<dynamic>> rowsAsListOfValues, CovidData covidData) async {
 
 		try {
 			covidData.headers = rowsAsListOfValues[0].cast<String>().toList();
