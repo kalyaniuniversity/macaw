@@ -44,7 +44,7 @@ class CovidIndiaWidgetStore {
 	
 	EdgeInsetsGeometry _getListItemPadding(int index) {
 		switch(index) {
-			case 0: return EdgeInsets.only(top: 18.0, left: 10.0, right: 15.0);
+			case 0: return EdgeInsets.only(top: 0.0, left: 0.0, right: 0.0);
 			case 1: return EdgeInsets.only(left: 5.0, right: 5.0, top: 0.0, bottom: 0.0);
 			case 2: return EdgeInsets.only(top: 0.0, left: 15.0, right: 15.0, bottom: 15.0);
 			default: return EdgeInsets.all(15.0);
@@ -52,7 +52,7 @@ class CovidIndiaWidgetStore {
 	}
 
 	Widget _buildHeaderWidgetView() {
-		return _macawWidgetStore.buildFragmentHeader(Constant.INDIA);
+		return _macawWidgetStore.buildFragmentHeader(Constant.ASSET_TAJ_MAHAL_SVG, MacawPalette.roseannaGradient);
 	}
 
 	Widget _buildNotifierPanelWidgetView() {
@@ -77,7 +77,7 @@ class CovidIndiaWidgetStore {
 			Workhorse.numberFormat.format(CovidIndiaState.totalInfected),
 			Constant.FACE_MASK_EMOJI,
 			'+' + Workhorse.numberFormat.format(CovidIndiaState.infectionCountIncrease),
-			QuickInfoStyle.warningStyle,
+			QuickInfoStyle.warningStyleSmallFont,
 			QuickInfoStyle.warningExtraInfo
 		));
 	}
@@ -99,7 +99,7 @@ class CovidIndiaWidgetStore {
 			Workhorse.numberFormat.format(CovidIndiaState.totalRecovered),
 			Constant.FACE_SUNGLASS_EMOJI,
 			'+' + Workhorse.numberFormat.format(CovidIndiaState.recoveredCountIncrease),
-			QuickInfoStyle.positiveStyle,
+			QuickInfoStyle.positiveStyleSmallFont,
 			QuickInfoStyle.positiveExtraInfo
 		));
 	}
@@ -121,7 +121,7 @@ class CovidIndiaWidgetStore {
 			Workhorse.numberFormat.format(CovidIndiaState.totalDeceased),
 			Constant.SLIGHT_FROWNING_EMOJI,
 			'+' + Workhorse.numberFormat.format(CovidIndiaState.deceasedCountIncrease),
-			QuickInfoStyle.dangerStyle,
+			QuickInfoStyle.dangerStyleSmallFont,
 			QuickInfoStyle.dangerExtraInfo
 		));
 	}

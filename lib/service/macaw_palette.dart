@@ -11,6 +11,10 @@ class MacawPalette {
 	static const int _colorMudGold = 0xFF8C814A;
 	static const int _colorWatermelonRed = 0xFFFE7f9C;
 
+	static const int _colorRoseannaGradientStart = 0xFFFFAFBD;
+	static const int _colorRoseannaGradientEnd = 0xFFFFC3A0;
+	static const int _colorYellowGradientStart = 0xFFFFC30B;
+
 	static const int _greyTint1 = 0xFFFf1F1F1;
 	static const int _greyTint2 = 0xFFEDEDED;
 	static const int _greyTint3 = 0xFFE4E4E4;
@@ -22,6 +26,10 @@ class MacawPalette {
 
 	static const Color primaryColor = const Color(MacawPalette._colorGreystone);
 	static const Color accentColor = const Color(MacawPalette._colorWatermelonRed);
+
+	static const Color roseannaGradientStart = const Color(MacawPalette._colorRoseannaGradientStart);
+	static const Color roseannaGradientEnd = const Color(MacawPalette._colorRoseannaGradientEnd);
+	static const Color yellowGradientStart = const Color(MacawPalette._colorYellowGradientStart);
 
 	static const Color darkBlue = const Color(MacawPalette._colorDarkBlue);
 	static const Color darkYellow = const Color(MacawPalette._colorDarkYellow);
@@ -51,4 +59,6 @@ class MacawPalette {
 	};
 
 	static MaterialColor primarySwatch = MaterialColor(MacawPalette._colorGreystone, _swatch);
+	static List<Color> roseannaGradient = [ MacawPalette.roseannaGradientStart, MacawPalette.roseannaGradientEnd ];
+	static List<Color> yellowGradient = [ MacawPalette.yellowGradientStart, MacawPalette.darkYellow ];
 }

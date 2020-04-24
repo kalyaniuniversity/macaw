@@ -44,4 +44,7 @@ class Constant {
 	static const String WORLD_DECEASED_DATALOAD_FAILURE_MESSAGE = "The data for World's COVID-19 deceased cases could not be loaded. This could be due to an internet connection failure or the server may not be available now.";
 	static const String NETWORK_FAILURE_MESSAGE = "A network failure occured. Please check if you have an active internet connection, or the remote server may be inaccessible. Try after sometime.";
 	static const String NETWORK_FAILURE_MESSAGE_SHORT = "We failed to fetch information from the internet.";
+
+	static const String ASSET_TAJ_MAHAL_SVG = "assets/images/taj-mahal.svg";
+	static const String ASSET_WORLD_SVG = "assets/images/world.svg";
 }

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:macaw/model/data_manager.dart';
 import 'package:macaw/service/constant.dart';
@@ -8,23 +9,24 @@ import 'package:macaw/widget/quick_info.dart';
 
 class MacawWidgetStore {
 
-	Widget buildFragmentHeader(String title) {
+	Widget buildFragmentHeader(String asset, List<Color> gradient) {
 		return Container(
-			margin: const EdgeInsets.only(top: 15.0),
+			height: 200.0,
+			decoration: BoxDecoration(
+				gradient: LinearGradient(
+					begin: Alignment.topRight,
+					end: Alignment.bottomLeft,
+					colors: gradient
+				),
+			),
 			child: Column(
-				crossAxisAlignment: CrossAxisAlignment.end,
+				crossAxisAlignment: CrossAxisAlignment.center,
 				mainAxisAlignment: MainAxisAlignment.end,
 				children: <Widget>[
-					Text(
-						title,
-						style: GoogleFonts.bebasNeue(
-							textStyle: TextStyle(
-								color: MacawPalette.accentColor,
-								fontSize: 45.0,
-								fontWeight: FontWeight.bold,
-								letterSpacing: 4.0,
-							)
-						),
+					SvgPicture.asset(
+						asset,
+						height: 200.0,
+						alignment: Alignment.bottomCenter,
 					)
 				],
 			)
@@ -53,6 +55,7 @@ class MacawWidgetStore {
 
 	Widget buildDateNotifierWidgetView(String viewSubject, String date) {
 		return Container(
+			alignment: Alignment.center,
 			margin: const EdgeInsets.only(
 				left: 4.0,
 				right: 4.0
@@ -65,7 +68,7 @@ class MacawWidgetStore {
 				text: TextSpan(
 					children: <TextSpan>[
 						TextSpan(
-							text: "DATA AS OF ",
+							text: "AS OF ",
 							style: GoogleFonts.changa(
 								textStyle: TextStyle(
 									color: Colors.black54,
