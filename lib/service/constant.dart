@@ -25,7 +25,6 @@ class Constant {
 	static const String VICTORY_HAND_EMOJI = "✌️";
 	static const String SLIGHT_FROWNING_EMOJI = "🙁";
 
-
 	static const int VIEW_FRAGMENT_COVID_INDIA = 0;
 	static const int VIEW_FRAGMENT_COVID_WORLD = 1;
 	static const int VIEW_FRAGMENT_MAP = 2;
@@ -64,4 +63,5 @@ class Constant {
 	static const int FILE_TYPE_WORLD_RECOVERED = 5;
 	static const int FILE_TYPE_WORLD_DECEASED = 6;
 
+	static const String DEBACHARYA_COM = "debacharya.com";
 }

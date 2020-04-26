@@ -28,13 +28,13 @@ class DataManager {
 
 	static MacawWidgetStore _widgetStore = MacawWidgetStore();
 
-	static Future<void> loadData(BuildContext context) async {
+	static Future<void> loadData(BuildContext context, { refresh = false }) async {
 
 		if(!MacawStateManagement.isInitialDataLoaded) {
 
 			await Future.wait([
-				DataManager._prepareCovidIndiaData(context),
-				DataManager._prepareCovidWorldData(context)
+				DataManager._prepareCovidIndiaData(context, refresh),
+				DataManager._prepareCovidWorldData(context, refresh)
 			]);
 
 			MacawStateManagement.isInitialDataLoaded = true;
@@ -48,92 +48,98 @@ class DataManager {
 		MacawStateManagement.isWorldLatestDateLoaded = false;
 
 		MacawStateManagement.appViewFragmentStateChangeCallback(MacawStateManagement.currentViewFragment);
-		await DataManager.loadData(context);
+		await DataManager.loadData(context, refresh: true);
 	}
 
-	static Future<void> _prepareCovidIndiaData(BuildContext context) async {
+	static Future<void> _prepareCovidIndiaData(BuildContext context, bool refresh) async {
 		await Future.wait([
-			DataManager._prepareIndiaConfirmedData(context),
-			DataManager._prepareIndiaRecoveredData(context),
-			DataManager._prepareIndiaDeceasedData(context)
+			DataManager._prepareIndiaConfirmedData(context, refresh),
+			DataManager._prepareIndiaRecoveredData(context, refresh),
+			DataManager._prepareIndiaDeceasedData(context, refresh)
 		]);
 	}
 
-	static Future<void> _prepareCovidWorldData(BuildContext context) async {
+	static Future<void> _prepareCovidWorldData(BuildContext context, bool refresh) async {
 		await Future.wait([
-			DataManager._prepareWorldConfirmedData(context),
-			DataManager._prepareWorldRecoveredData(context),
-			DataManager._prepareWorldDeceasedData(context)
+			DataManager._prepareWorldConfirmedData(context, refresh),
+			DataManager._prepareWorldRecoveredData(context, refresh),
+			DataManager._prepareWorldDeceasedData(context, refresh)
 		]);
 	}
 
-	static Future<void> _prepareIndiaConfirmedData(BuildContext context) async {
+	static Future<void> _prepareIndiaConfirmedData(BuildContext context, bool refresh) async {
 		await DataManager._prepareCovidData(
 			context: context,
 			url: Constant.INDIA_CONFIRMED_CASES_DATASET_URL,
 			failureMessage: Constant.INDIA_CONFIRMED_DATALOAD_FAILURE_MESSAGE,
 			covidData: DataManager.covidIndiaConfirmed,
 			csvFileType: Constant.FILE_TYPE_INDIA_CONFIRMED,
+			refresh: refresh,
 			india: true,
 			dataManagerCallback: DataProvider.provideIndiaConfirmedData
 		);
 	}
 
-	static Future<void> _prepareIndiaRecoveredData(BuildContext context) async {
+	static Future<void> _prepareIndiaRecoveredData(BuildContext context, bool refresh) async {
 		await DataManager._prepareCovidData(
 			context: context,
 			url: Constant.INDIA_RECOVERY_CASES_DATASET_URL,
 			failureMessage: Constant.INDIA_RECOVERY_DATALOAD_FAILURE_MESSAGE,
 			covidData: DataManager.covidIndiaRecovered,
 			csvFileType: Constant.FILE_TYPE_INDIA_RECOVERED,
+			refresh: refresh,
 			india: true,
 			dataManagerCallback: DataProvider.provideIndiaRecoveredData
 		);
 	}
 
-	static Future<void> _prepareIndiaDeceasedData(BuildContext context) async {
+	static Future<void> _prepareIndiaDeceasedData(BuildContext context, bool refresh) async {
 		await DataManager._prepareCovidData(
 			context: context,
 			url: Constant.INDIA_DECEASED_CASES_DATASET_URL,
 			failureMessage: Constant.INDIA_DECEASED_DATALOAD_FAILURE_MESSAGE,
 			covidData: DataManager.covidIndiaDeceased,
 			csvFileType: Constant.FILE_TYPE_INDIA_DECEASED,
+			refresh: refresh,
 			india: true,
 			dataManagerCallback: DataProvider.provideIndiaDeceasedData
 		);
 	}
 
-	static Future<void> _prepareWorldConfirmedData(BuildContext context) async {
+	static Future<void> _prepareWorldConfirmedData(BuildContext context, bool refresh) async {
 		await DataManager._prepareCovidData(
 			context: context,
 			url: Constant.WORLD_CONFIRMED_CASES_DATASET_URL,
 			failureMessage: Constant.WORLD_CONFIRMED_DATALOAD_FAILURE_MESSAGE,
 			covidData: DataManager.covidWorldConfirmed,
 			csvFileType: Constant.FILE_TYPE_WORLD_CONFIRMED,
+			refresh: refresh,
 			world: true,
 			dataManagerCallback: DataProvider.provideWorldConfirmedData
 		);
 	}
 
-	static Future<void> _prepareWorldRecoveredData(BuildContext context) async {
+	static Future<void> _prepareWorldRecoveredData(BuildContext context, bool refresh) async {
 		await DataManager._prepareCovidData(
 			context: context,
 			url: Constant.WORLD_RECOVERY_CASES_DATASET_URL,
 			failureMessage: Constant.WORLD_RECOVERY_DATALOAD_FAILURE_MESSAGE,
 			covidData: DataManager.covidWorldRecovered,
 			csvFileType: Constant.FILE_TYPE_WORLD_RECOVERED,
+			refresh: refresh,
 			world: true,
 			dataManagerCallback: DataProvider.provideWorldRecoveredData
 		);
 	}
 
-	static Future<void> _prepareWorldDeceasedData(BuildContext context) async {
+	static Future<void> _prepareWorldDeceasedData(BuildContext context, bool refresh) async {
 		await DataManager._prepareCovidData(
 			context: context,
 			url: Constant.WORLD_DECEASED_CASES_DATASET_URL,
 			failureMessage: Constant.WORLD_DECEASED_DATALOAD_FAILURE_MESSAGE,
 			covidData: DataManager.covidWorldDeceased,
 			csvFileType: Constant.FILE_TYPE_WORLD_DECEASED,
+			refresh: refresh,
 			world: true,
 			dataManagerCallback: DataProvider.provideWorldDeceasedData
 		);
@@ -145,12 +151,13 @@ class DataManager {
 		@required CovidData covidData,
 		@required Function dataManagerCallback,
 		@required int csvFileType,
+		@required bool refresh,
 		bool india = false,
 		bool world = false }) async {
 
 		bool hasError = false;
 		bool writeToFile = false;
-		String rawData = await DataManager._persistence.readCovidCSV(csvFileType);
+		String rawData = refresh ? null : await DataManager._persistence.readCovidCSV(csvFileType);
 
 		if(rawData == null) {
 			writeToFile = true;
