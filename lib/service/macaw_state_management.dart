@@ -5,6 +5,7 @@ class MacawStateManagement {
 
 	static bool rootStateManaged = false;
 	static bool isInitialDataLoaded = false;
+	static bool showLoadingProgressbar = true;
 
 	static bool isIndiaLatestDateLoaded = false;
 	static bool isIndiaConfirmedTotalLoaded = false;

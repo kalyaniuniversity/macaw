@@ -56,7 +56,9 @@ class CovidWorldWidgetStore {
 	}
 
 	Widget _buildNotifierPanelWidgetView() {
-		return MacawStateManagement.isAllDataLoaded() ? this._macawWidgetStore.buildDateNotifierWidgetView(Constant.WORLD.toUpperCase(), CovidWorldState.latestDate) : this._macawWidgetStore.buildProgressIndicatorWidgetView();
+		return (MacawStateManagement.isAllDataLoaded() || !MacawStateManagement.showLoadingProgressbar)
+			? this._macawWidgetStore.buildDateNotifierWidgetView(Constant.WORLD.toUpperCase(), CovidWorldState.latestDate)
+			: this._macawWidgetStore.buildProgressIndicatorWidgetView();
 	}
 
 	Widget _buildRowOneWidgetView() {

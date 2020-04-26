@@ -49,4 +49,19 @@ class Constant {
 
 	static const String ASSET_TAJ_MAHAL_SVG = "assets/images/taj-mahal.svg";
 	static const String ASSET_WORLD_SVG = "assets/images/world.svg";
+
+	static const String COVID_INDIA_CONFIRMED_CSV_FILENAME = "covidindiaconfirmed.csv";
+	static const String COVID_INDIA_RECOVERED_CSV_FILENAME = "covidindiarecovered.csv";
+	static const String COVID_INDIA_DECEASED_CSV_FILENAME = "covidindiadeceased.csv";
+	static const String COVID_WORLD_CONFIRMED_CSV_FILENAME = "covidworldconfirmed.csv";
+	static const String COVID_WORLD_RECOVERED_CSV_FILENAME = "covidworldrecovered.csv";
+	static const String COVID_WORLD_DECEASED_CSV_FILENAME = "covidworlddeceased.csv";
+
+	static const int FILE_TYPE_INDIA_CONFIRMED = 1;
+	static const int FILE_TYPE_INDIA_RECOVERED = 2;
+	static const int FILE_TYPE_INDIA_DECEASED = 3;
+	static const int FILE_TYPE_WORLD_CONFIRMED = 4;
+	static const int FILE_TYPE_WORLD_RECOVERED = 5;
+	static const int FILE_TYPE_WORLD_DECEASED = 6;
+
 }

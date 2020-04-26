@@ -120,10 +120,9 @@ class RootWidgetStore {
 		switch(index) {
 			case 4:
 
+				MacawStateManagement.showLoadingProgressbar = true;
 				await DataManager.refreshData(context);
 				MacawStateManagement.rootScaffoldKey.currentState.showSnackBar(this._buildManualRefreshCompleteSnackBar());
-
-//				Scaffold.of(context).showSnackBar(snackbar);
 
 				break;
 		}

@@ -36,6 +36,7 @@ class RootView implements IMacawView {
 
 		if(!MacawStateManagement.rootStateManaged || !MacawStateManagement.isInitialDataLoaded) return;
 
+		MacawStateManagement.showLoadingProgressbar = false;
 		await DataManager.refreshData(context);
 		_pulldownRefreshController.refreshCompleted();
 	}

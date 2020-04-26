@@ -8,12 +8,15 @@ import 'package:macaw/model/data_provider.dart';
 import 'package:macaw/model/province.dart';
 import 'package:macaw/model/timeseries.dart';
 import 'package:macaw/service/constant.dart';
+import 'package:macaw/service/file_io.dart';
 import 'package:macaw/service/macaw_state_management.dart';
 import 'package:macaw/service/network_service.dart';
 import 'package:macaw/service/workhorse.dart';
 import 'package:macaw/widget/macaw_widget_store.dart';
 
 class DataManager {
+
+	static FileIO _persistence = FileIO();
 
 	static CovidData covidIndiaConfirmed = CovidData();
 	static CovidData covidIndiaRecovered = CovidData();
@@ -29,8 +32,10 @@ class DataManager {
 
 		if(!MacawStateManagement.isInitialDataLoaded) {
 
-			await DataManager._prepareCovidIndiaData(context);
-			await DataManager._prepareCovidWorldData(context);
+			await Future.wait([
+				DataManager._prepareCovidIndiaData(context),
+				DataManager._prepareCovidWorldData(context)
+			]);
 
 			MacawStateManagement.isInitialDataLoaded = true;
 		}
@@ -47,80 +52,88 @@ class DataManager {
 	}
 
 	static Future<void> _prepareCovidIndiaData(BuildContext context) async {
-
-		DataManager._prepareIndiaConfirmedData(context);
-		DataManager._prepareIndiaRecoveredData(context);
-		DataManager._prepareIndiaDeceasedData(context);
+		await Future.wait([
+			DataManager._prepareIndiaConfirmedData(context),
+			DataManager._prepareIndiaRecoveredData(context),
+			DataManager._prepareIndiaDeceasedData(context)
+		]);
 	}
 
 	static Future<void> _prepareCovidWorldData(BuildContext context) async {
-
-		DataManager._prepareWorldConfirmedData(context);
-		DataManager._prepareWorldRecoveredData(context);
-		DataManager._prepareWorldDeceasedData(context);
+		await Future.wait([
+			DataManager._prepareWorldConfirmedData(context),
+			DataManager._prepareWorldRecoveredData(context),
+			DataManager._prepareWorldDeceasedData(context)
+		]);
 	}
 
 	static Future<void> _prepareIndiaConfirmedData(BuildContext context) async {
-		DataManager._prepareCovidData(
+		await DataManager._prepareCovidData(
 			context: context,
 			url: Constant.INDIA_CONFIRMED_CASES_DATASET_URL,
 			failureMessage: Constant.INDIA_CONFIRMED_DATALOAD_FAILURE_MESSAGE,
 			covidData: DataManager.covidIndiaConfirmed,
+			csvFileType: Constant.FILE_TYPE_INDIA_CONFIRMED,
 			india: true,
 			dataManagerCallback: DataProvider.provideIndiaConfirmedData
 		);
 	}
 
 	static Future<void> _prepareIndiaRecoveredData(BuildContext context) async {
-		DataManager._prepareCovidData(
+		await DataManager._prepareCovidData(
 			context: context,
 			url: Constant.INDIA_RECOVERY_CASES_DATASET_URL,
 			failureMessage: Constant.INDIA_RECOVERY_DATALOAD_FAILURE_MESSAGE,
 			covidData: DataManager.covidIndiaRecovered,
+			csvFileType: Constant.FILE_TYPE_INDIA_RECOVERED,
 			india: true,
 			dataManagerCallback: DataProvider.provideIndiaRecoveredData
 		);
 	}
 
 	static Future<void> _prepareIndiaDeceasedData(BuildContext context) async {
-		DataManager._prepareCovidData(
+		await DataManager._prepareCovidData(
 			context: context,
 			url: Constant.INDIA_DECEASED_CASES_DATASET_URL,
 			failureMessage: Constant.INDIA_DECEASED_DATALOAD_FAILURE_MESSAGE,
 			covidData: DataManager.covidIndiaDeceased,
+			csvFileType: Constant.FILE_TYPE_INDIA_DECEASED,
 			india: true,
 			dataManagerCallback: DataProvider.provideIndiaDeceasedData
 		);
 	}
 
 	static Future<void> _prepareWorldConfirmedData(BuildContext context) async {
-		DataManager._prepareCovidData(
+		await DataManager._prepareCovidData(
 			context: context,
 			url: Constant.WORLD_CONFIRMED_CASES_DATASET_URL,
 			failureMessage: Constant.WORLD_CONFIRMED_DATALOAD_FAILURE_MESSAGE,
 			covidData: DataManager.covidWorldConfirmed,
+			csvFileType: Constant.FILE_TYPE_WORLD_CONFIRMED,
 			world: true,
 			dataManagerCallback: DataProvider.provideWorldConfirmedData
 		);
 	}
 
 	static Future<void> _prepareWorldRecoveredData(BuildContext context) async {
-		DataManager._prepareCovidData(
+		await DataManager._prepareCovidData(
 			context: context,
 			url: Constant.WORLD_RECOVERY_CASES_DATASET_URL,
 			failureMessage: Constant.WORLD_RECOVERY_DATALOAD_FAILURE_MESSAGE,
 			covidData: DataManager.covidWorldRecovered,
+			csvFileType: Constant.FILE_TYPE_WORLD_RECOVERED,
 			world: true,
 			dataManagerCallback: DataProvider.provideWorldRecoveredData
 		);
 	}
 
 	static Future<void> _prepareWorldDeceasedData(BuildContext context) async {
-		DataManager._prepareCovidData(
+		await DataManager._prepareCovidData(
 			context: context,
 			url: Constant.WORLD_DECEASED_CASES_DATASET_URL,
 			failureMessage: Constant.WORLD_DECEASED_DATALOAD_FAILURE_MESSAGE,
 			covidData: DataManager.covidWorldDeceased,
+			csvFileType: Constant.FILE_TYPE_WORLD_DECEASED,
 			world: true,
 			dataManagerCallback: DataProvider.provideWorldDeceasedData
 		);
@@ -131,22 +144,33 @@ class DataManager {
 		@required String failureMessage,
 		@required CovidData covidData,
 		@required Function dataManagerCallback,
+		@required int csvFileType,
 		bool india = false,
 		bool world = false }) async {
 
 		bool hasError = false;
-		String rawData = await NetworkService.getResponseFromRemoteLocation(context, url, externalErrorManager: true);
+		bool writeToFile = false;
+		String rawData = await DataManager._persistence.readCovidCSV(csvFileType);
+
+		if(rawData == null) {
+			writeToFile = true;
+			rawData = await NetworkService.getResponseFromRemoteLocation(context, url, externalErrorManager: true);
+		}
 
 		if(rawData == null) hasError = true;
 
 		try {
-			List<List<dynamic>> rowsAsListOfValues = const CsvToListConverter().convert(
-				rawData,
-				eol: world ? '\n' : '\r\n'
-			);
+			if(!hasError) {
 
-			if(india) DataManager._prepareCovidIndiaDataObject(rowsAsListOfValues, covidData);
-			if(world) DataManager._prepareCovidWorldDataObject(rowsAsListOfValues, covidData);
+				List<List<dynamic>> rowsAsListOfValues = const CsvToListConverter().convert(
+					rawData,
+					eol: world ? '\n' : '\r\n'
+				);
+
+				if(writeToFile) DataManager._persistence.writeCovidCSV(rawData, csvFileType);
+				if(india) DataManager._prepareCovidIndiaDataObject(rowsAsListOfValues, covidData);
+				if(world) DataManager._prepareCovidWorldDataObject(rowsAsListOfValues, covidData);
+			}
 		} catch(e) {
 		} finally {
 			if(hasError) showDialog<void>(
@@ -159,7 +183,7 @@ class DataManager {
 		dataManagerCallback();
 	}
 
-	static Future<void> _prepareCovidIndiaDataObject(List<List<dynamic>> rowsAsListOfValues, CovidData covidData) async {
+	static void _prepareCovidIndiaDataObject(List<List<dynamic>> rowsAsListOfValues, CovidData covidData) {
 
 		Country india = Country(Constant.INDIA);
 		covidData.headers = rowsAsListOfValues[0].cast<String>().toList();
@@ -189,7 +213,7 @@ class DataManager {
 		covidData.addCountry(india);
 	}
 
-	static Future<void> _prepareCovidWorldDataObject(List<List<dynamic>> rowsAsListOfValues, CovidData covidData) async {
+	static void _prepareCovidWorldDataObject(List<List<dynamic>> rowsAsListOfValues, CovidData covidData) {
 
 		try {
 			covidData.headers = rowsAsListOfValues[0].cast<String>().toList();
@@ -214,7 +238,5 @@ class DataManager {
 		} catch(e) {
 			throw e;
 		}
-
-
 	}
 }

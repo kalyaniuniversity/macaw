@@ -56,7 +56,9 @@ class CovidIndiaWidgetStore {
 	}
 
 	Widget _buildNotifierPanelWidgetView() {
-		return MacawStateManagement.isAllDataLoaded() ? this._macawWidgetStore.buildDateNotifierWidgetView(Constant.INDIA.toUpperCase(), CovidIndiaState.latestDate) : this._macawWidgetStore.buildProgressIndicatorWidgetView();
+		return (MacawStateManagement.isAllDataLoaded() || !MacawStateManagement.showLoadingProgressbar)
+			? this._macawWidgetStore.buildDateNotifierWidgetView(Constant.INDIA.toUpperCase(), CovidIndiaState.latestDate)
+			: this._macawWidgetStore.buildProgressIndicatorWidgetView();
 	}
 
 	Widget _buildRowOneWidgetView() {
