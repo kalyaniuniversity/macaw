@@ -12,6 +12,7 @@ import 'package:macaw/service/file_io.dart';
 import 'package:macaw/service/macaw_state_management.dart';
 import 'package:macaw/service/network_service.dart';
 import 'package:macaw/service/workhorse.dart';
+import 'package:macaw/widget/macaw_network_error_alert_dialog.dart';
 import 'package:macaw/widget/macaw_widget_store.dart';
 
 class DataManager {
@@ -25,8 +26,6 @@ class DataManager {
 	static CovidData covidWorldConfirmed = CovidData();
 	static CovidData covidWorldRecovered = CovidData();
 	static CovidData covidWorldDeceased = CovidData();
-
-	static MacawWidgetStore _widgetStore = MacawWidgetStore();
 
 	static Future<void> loadData(BuildContext context, { refresh = false }) async {
 
@@ -183,7 +182,7 @@ class DataManager {
 			if(hasError) showDialog<void>(
 				context: context,
 				barrierDismissible: false,
-				builder: (BuildContext dialogContext) => DataManager._widgetStore.buildNetworkErrorAlertDialog(dialogContext, context, failureMessage)
+				builder: (BuildContext dialogContext) => MacawNetworkErrorAlertDialog(context, failureMessage)
 			);
 		}
 

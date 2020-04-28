@@ -1,4 +1,4 @@
-import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 import 'package:macaw/controller/root_controller.dart';
 import 'package:macaw/model/data_manager.dart';
 import 'package:macaw/service/macaw_state_management.dart';
@@ -10,7 +10,6 @@ class RootState extends State<RootController> {
 
 	@override
 	Widget build(BuildContext context) {
-
 		this._prepareState();
 		DataManager.loadData(context);
 

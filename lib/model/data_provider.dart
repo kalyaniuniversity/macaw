@@ -5,6 +5,7 @@ import 'package:macaw/model/covid_world_state.dart';
 import 'package:macaw/model/data_manager.dart';
 import 'package:macaw/model/province.dart';
 import 'package:macaw/model/timeseries.dart';
+import 'package:macaw/service/data_subscription.dart';
 import 'package:macaw/service/macaw_state_management.dart';
 
 class DataProvider {
@@ -61,14 +62,14 @@ class DataProvider {
 
 	static void _setIndiaLatestDate() {
 		if(DataManager.covidIndiaConfirmed.headers.length > 0) {
-			CovidIndiaState.latestDate = DataManager.covidIndiaConfirmed.headers.last;
+			DataSubscription.renewIndiaLatestDate(DataManager.covidIndiaConfirmed.headers.last);
 			MacawStateManagement.isIndiaLatestDateLoaded = true;
 		}
 	}
 
 	static void _setWorldLatestDate() {
 		if(DataManager.covidWorldConfirmed.headers.length > 0) {
-			CovidWorldState.latestDate = DataManager.covidWorldConfirmed.headers.last;
+			DataSubscription.renewWorldLatestDate(DataManager.covidWorldConfirmed.headers.last);
 			MacawStateManagement.isWorldLatestDateLoaded = true;
 		}
 	}

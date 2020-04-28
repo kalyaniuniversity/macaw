@@ -33,7 +33,7 @@ class MacawStateManagement {
 
 	static GlobalKey<ScaffoldState> rootScaffoldKey = GlobalKey<ScaffoldState>();
 
-	static var appViewFragmentStateChangeCallback;
+	static Function appViewFragmentStateChangeCallback;
 
 	static bool isAllDataLoaded() {
 		return MacawStateManagement._isIndiaDataLoaded() && MacawStateManagement._isWorldDataLoaded();

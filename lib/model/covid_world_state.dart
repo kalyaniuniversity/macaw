@@ -1,7 +1,5 @@
 class CovidWorldState {
 
-	static String latestDate = "-";
-
 	static double totalInfected = 0;
 	static double totalRecovered = 0;
 	static double totalDeceased = 0;

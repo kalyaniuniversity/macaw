@@ -9,30 +9,6 @@ import 'package:macaw/widget/quick_info.dart';
 
 class MacawWidgetStore {
 
-	Widget buildFragmentHeader(String asset, List<Color> gradient) {
-		return Container(
-			height: 200.0,
-			decoration: BoxDecoration(
-				gradient: LinearGradient(
-					begin: Alignment.topRight,
-					end: Alignment.bottomLeft,
-					colors: gradient
-				),
-			),
-			child: Column(
-				crossAxisAlignment: CrossAxisAlignment.center,
-				mainAxisAlignment: MainAxisAlignment.end,
-				children: <Widget>[
-					SvgPicture.asset(
-						asset,
-						height: 200.0,
-						alignment: Alignment.bottomCenter,
-					)
-				],
-			)
-		);
-	}
-
 	Widget buildQuickInfo(QuickInfo quickInfo, { bool isNeutral = false }) {
 		return isNeutral ? this._buildNeutralQuickInfo(quickInfo) : this._buildBiasedQuickInfo(quickInfo);
 	}
@@ -50,54 +26,6 @@ class MacawWidgetStore {
 			indent: 30.0,
 			endIndent: 30.0,
 			thickness: 3.0,
-		);
-	}
-
-	Widget buildDateNotifierWidgetView(String viewSubject, String date) {
-		return Container(
-			alignment: Alignment.center,
-			margin: const EdgeInsets.only(
-				left: 4.0,
-				right: 4.0
-			),
-			padding: const EdgeInsets.all(8.0),
-			decoration: BoxDecoration(
-
-			),
-			child: RichText(
-				text: TextSpan(
-					children: <TextSpan>[
-						TextSpan(
-							text: "AS OF ",
-							style: GoogleFonts.changa(
-								textStyle: TextStyle(
-									color: Colors.black54,
-									fontSize: 14.0,
-								)
-							)
-						),
-						TextSpan(
-							text: date,
-							style: GoogleFonts.changa(
-								textStyle: TextStyle(
-									color: MacawPalette.accentColor,
-									fontSize: 16.0,
-									fontWeight: FontWeight.bold
-								)
-							)
-						),
-						TextSpan(
-							text: " (MM/DD/YYYY)",
-							style: GoogleFonts.changa(
-								textStyle: TextStyle(
-									color: Colors.black54,
-									fontSize: 14.0
-								)
-							)
-						)
-					]
-				),
-			),
 		);
 	}
 
@@ -154,76 +82,6 @@ class MacawWidgetStore {
 			actions: <Widget>[
 				FlatButton(
 					child: Text("Okay"),
-					onPressed: () {
-						Navigator.of(context).pop();
-					},
-				)
-			],
-		);
-	}
-
-	Widget buildNetworkErrorAlertDialog(BuildContext context, BuildContext callerContext, String message) {
-		return AlertDialog(
-			title: Text(
-				"Oops! 🤕",
-				style: GoogleFonts.roboto(
-					textStyle: TextStyle(
-						color: MacawPalette.redTintB,
-						fontSize: 40.0,
-						fontWeight: FontWeight.w200
-					)
-				),
-			),
-			content: SingleChildScrollView(
-				child: ListBody(
-					children: <Widget>[
-						Container(
-							padding: const EdgeInsets.all(4.0),
-							decoration: BoxDecoration(
-								color: MacawPalette.greyTintC
-							),
-							child: Text(
-								Constant.NETWORK_FAILURE_MESSAGE_SHORT,
-								style: GoogleFonts.robotoMono(
-									textStyle: TextStyle(
-										fontSize: 11.0
-									)
-								),
-							)
-						),
-						Container(
-							padding: const EdgeInsets.only(
-								left: 4.0,
-								right: 4.0,
-								bottom: 4.0,
-								top: 10.0
-							),
-							margin: const EdgeInsets.only(
-								top: 10.0
-							),
-							child: Text(
-								message,
-								style: GoogleFonts.roboto(
-									textStyle: TextStyle(
-										fontSize: 14.0
-									)
-								),
-							)
-						)
-					],
-				),
-			),
-			actions: <Widget>[
-				FlatButton(
-					child: Text(Constant.TRY_AGAIN),
-					onPressed: () {
-						MacawStateManagement.isInitialDataLoaded = true;
-						Navigator.of(context).pop();
-						DataManager.loadData(callerContext);
-					},
-				),
-				FlatButton(
-					child: Text(Constant.DISMISS),
 					onPressed: () {
 						Navigator.of(context).pop();
 					},

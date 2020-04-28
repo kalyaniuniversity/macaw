@@ -14,7 +14,6 @@ class RootView implements IMacawView {
 
 	@override
 	Widget getView(BuildContext context) {
-
 		return Scaffold(
 			key: MacawStateManagement.rootScaffoldKey,
 			bottomNavigationBar: _widgetStore.getBottomNavigationBar(context),

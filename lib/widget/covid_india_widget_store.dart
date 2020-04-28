@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:macaw/controller/date_notifier_controller.dart';
 import 'package:macaw/model/covid_india_state.dart';
 import 'package:macaw/service/constant.dart';
+import 'package:macaw/service/data_subscription.dart';
 import 'package:macaw/service/macaw_palette.dart';
 import 'package:macaw/service/macaw_state_management.dart';
 import 'package:macaw/service/workhorse.dart';
+import 'package:macaw/widget/macaw_fragment_header.dart';
 import 'package:macaw/widget/macaw_widget_store.dart';
 import 'package:macaw/widget/quick_info.dart';
 import 'package:macaw/widget/quick_info_style.dart';
@@ -11,11 +14,12 @@ import 'package:macaw/widget/quick_info_style.dart';
 class CovidIndiaWidgetStore {
 
 	MacawWidgetStore _macawWidgetStore = MacawWidgetStore();
+	DateNotifierController _dateNotifierController = DateNotifierController(key: Key('1'), subscriber: DataSubscription.indiaLatestDateSubscription);
 
 	Widget getView(BuildContext context) {
 		return ListView.separated(
 			separatorBuilder: this._listViewSeparatorBuilder,
-			itemCount: 5,
+			itemCount: 6,
 			itemBuilder: (context, index) => Padding(
 				padding: this._getListItemPadding(index),
 				child: this._listViewChildBuilder(index)
@@ -30,6 +34,7 @@ class CovidIndiaWidgetStore {
 			case 2: return this._buildRowOneWidgetView();
 			case 3: return this._buildRowTwoWidgetView();
 			case 4: return this._buildRowThreeWidgetView();
+			case 5: return this._dateNotifierController;
 			default: return null;
 		}
 	}
@@ -52,12 +57,12 @@ class CovidIndiaWidgetStore {
 	}
 
 	Widget _buildHeaderWidgetView() {
-		return _macawWidgetStore.buildFragmentHeader(Constant.ASSET_TAJ_MAHAL_SVG, MacawPalette.roseannaGradient);
+		return MacawFragmentHeader(Constant.ASSET_TAJ_MAHAL_SVG, MacawPalette.roseannaGradient);
 	}
 
 	Widget _buildNotifierPanelWidgetView() {
 		return (MacawStateManagement.isAllDataLoaded() || !MacawStateManagement.showLoadingProgressbar)
-			? this._macawWidgetStore.buildDateNotifierWidgetView(Constant.INDIA.toUpperCase(), CovidIndiaState.latestDate)
+			? Container()
 			: this._macawWidgetStore.buildProgressIndicatorWidgetView();
 	}
 
