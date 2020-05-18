@@ -13,7 +13,6 @@ import 'package:macaw/service/macaw_state_management.dart';
 import 'package:macaw/service/network_service.dart';
 import 'package:macaw/service/workhorse.dart';
 import 'package:macaw/widget/macaw_network_error_alert_dialog.dart';
-import 'package:macaw/widget/macaw_widget_store.dart';
 
 class DataManager {
 

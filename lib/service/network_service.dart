@@ -5,6 +5,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:macaw/service/constant.dart';
+import 'package:macaw/widget/macaw_default_network_error_dialog.dart';
 import 'package:macaw/widget/macaw_widget_store.dart';
 
 class NetworkService {
@@ -32,7 +33,7 @@ class NetworkService {
 		showDialog<void>(
 			context: context,
 			barrierDismissible: false,
-			builder: NetworkService._widgetStore.buildDefaultNetworkErrorDialog
+			builder: (context) => MacawDefaultNetworkErrorDialog()
 		);
 
 		return null;

@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:macaw/controller/date_notifier_controller.dart';
-import 'package:macaw/service/macaw_palette.dart';
 import 'package:macaw/service/subscriber.dart';
 import 'package:macaw/view/date_notifier_view.dart';
 
