@@ -4,10 +4,13 @@ class Constant {
 	static const String INDIA = "India";
 	static const String WORLD = "World";
 	static const String MAP = "Map";
+	static const String WORLD_MAP = "World Map";
+	static const String INDIAN_MAP = "Indian Map";
 	static const String MORE = "More";
 	static const String TRY_AGAIN = "Try Again";
 	static const String DISMISS = "Dismiss";
 	static const String OKAY = "Okay";
+	static const String GO_BACK = "Go Back";
 	static const String TOTAL_INFECTED = "Total Infected";
 	static const String TOTAL_RECOVERED = "Total Recovered";
 	static const String TOTAL_DECEASED = "Total Deceased";
@@ -27,7 +30,6 @@ class Constant {
 
 	static const int VIEW_FRAGMENT_COVID_INDIA = 0;
 	static const int VIEW_FRAGMENT_COVID_WORLD = 1;
-	static const int VIEW_FRAGMENT_MAP = 2;
 
 	static const String INDIA_CONFIRMED_CASES_DATASET_URL = "https://raw.githubusercontent.com/kalyaniuniversity/COVID-19-Datasets/master/India%20Statewise%20Confirmed%20Cases/COVID19_INDIA_STATEWISE_TIME_SERIES_CONFIRMED.csv";
 	static const String INDIA_RECOVERY_CASES_DATASET_URL = "https://raw.githubusercontent.com/kalyaniuniversity/COVID-19-Datasets/master/India%20Statewise%20Recovery%20Cases/COVID19_INDIA_STATEWISE_TIME_SERIES_RECOVERY.csv";

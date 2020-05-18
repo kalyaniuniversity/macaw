@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:macaw/controller/covid_map_controller.dart';
 import 'package:macaw/model/data_manager.dart';
 import 'package:macaw/presentation/swan_icons.dart';
 import 'package:macaw/service/constant.dart';
@@ -29,15 +30,12 @@ class RootWidgetStore {
 
 	CovidIndiaWidgetStore _covidIndiaWidgetStore = CovidIndiaWidgetStore();
 	CovidWorldWidgetStore _covidWorldWidgetStore = CovidWorldWidgetStore();
-	CovidMapWidgetStore _covidMapWidgetStore = CovidMapWidgetStore();
 
 	Widget buildMacawViewFragment(BuildContext context) {
 
 		switch(MacawStateManagement.currentViewFragment) {
 			case Constant.VIEW_FRAGMENT_COVID_INDIA: return this._covidIndiaWidgetStore.getView(context);
 			case Constant.VIEW_FRAGMENT_COVID_WORLD: return this._covidWorldWidgetStore.getView(context);
-			case Constant.VIEW_FRAGMENT_MAP: return this._covidMapWidgetStore.getView(context);
-
 			default: return null;
 		}
 	}
@@ -129,8 +127,15 @@ class RootWidgetStore {
 	}
 
 	void _onBottomNavigationBarItemTapped(BuildContext context, int index) {
-		if(index == 3) return;
-		else MacawStateManagement.appViewFragmentStateChangeCallback(index);
+
+		switch(index) {
+			case 0:
+			case 1: MacawStateManagement.appViewFragmentStateChangeCallback(index); break;
+			case 2: Navigator.push(context, new MaterialPageRoute(
+				builder: (context) => CovidMapController()
+			)); break;
+			case 3: break;
+		}
 	}
 
 	SnackBar _buildManualRefreshCompleteSnackBar() {

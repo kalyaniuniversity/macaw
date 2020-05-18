@@ -17,9 +17,7 @@ class RootState extends State<RootController> {
 	}
 
 	void _prepareState() {
-
 		if(!MacawStateManagement.rootStateManaged) {
-
 			MacawStateManagement.appViewFragmentStateChangeCallback = this._appViewFragmentStateChange;
 			MacawStateManagement.rootStateManaged = true;
 		}
