@@ -65,5 +65,8 @@ class Constant {
 	static const int FILE_TYPE_WORLD_RECOVERED = 5;
 	static const int FILE_TYPE_WORLD_DECEASED = 6;
 
+	static const int INDIA_MAP_DATA = 1;
+	static const int WORLD_MAP_DATA = 2;
+
 	static const String DEBACHARYA_COM = "debacharya.com";
 }

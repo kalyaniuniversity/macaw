@@ -17,10 +17,13 @@ class MapState extends State<CovidMapController> with TickerProviderStateMixin {
 	LatLng _center = LatLng(20.5937, 78.9629);
 
 	MapOptions _mapOptions;
+	int _mapData;
 
 	@override
 	void initState() {
 		super.initState();
+
+		this._mapData = Constant.INDIA_MAP_DATA;
 		this._mapOptions = MapOptions(
 			center: this._center,
 			zoom: 5.0
@@ -30,7 +33,9 @@ class MapState extends State<CovidMapController> with TickerProviderStateMixin {
 	@override
 	Widget build(BuildContext context) {
 		return Scaffold(
-			body: this._mapWidgetStore.getMap(this._mapOptions, this._mapController),
+			body: Builder(
+				builder: (ctx) => this._mapWidgetStore.getMap(ctx, this._mapOptions, this._mapController, this._mapData),
+			),
 			floatingActionButton: Builder(
 				builder: (ctx) => this._mapWidgetStore.getFloatingActionButton(ctx, this._getFabItems(ctx)),
 			),
@@ -53,10 +58,16 @@ class MapState extends State<CovidMapController> with TickerProviderStateMixin {
 
 	void _showWorldMap() {
 		this._animatedMapMove(this._center, 2);
+		setState(() {
+			this._mapData = Constant.WORLD_MAP_DATA;
+		});
 	}
 
 	void _showIndianMap() {
 		this._animatedMapMove(this._center, 5);
+		setState(() {
+			this._mapData = Constant.INDIA_MAP_DATA;
+		});
 	}
 
 	void _animatedMapMove(LatLng destination, double zoom) {

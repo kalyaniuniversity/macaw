@@ -21,6 +21,7 @@ class Province {
 	set avgTemperature(double value) => this._avgTemperature = value;
 	set provinceCode(String value) => this._provinceCode = value;
 
+	Coordinate get coordinate => this._coordinates;
 	Timeseries get lastTimeseries => this._timeseries.last;
 
 	String getNameLabel() {
