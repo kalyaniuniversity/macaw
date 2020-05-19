@@ -1,6 +1,7 @@
 class Constant {
 
 	static const String MATERIAL_APP_TITLE = "COVID-19 Analysis";
+	static const String MACAW = "macaw";
 	static const String INDIA = "India";
 	static const String WORLD = "World";
 	static const String MAP = "Map";
@@ -11,6 +12,8 @@ class Constant {
 	static const String DISMISS = "Dismiss";
 	static const String OKAY = "Okay";
 	static const String GO_BACK = "Go Back";
+	static const String KU = "University of Kalyani";
+	static const String CSE = "Dept. of Computer Science & Engineering";
 	static const String TOTAL_INFECTED = "Total Infected";
 	static const String TOTAL_RECOVERED = "Total Recovered";
 	static const String TOTAL_DECEASED = "Total Deceased";
@@ -69,4 +72,9 @@ class Constant {
 	static const int WORLD_MAP_DATA = 2;
 
 	static const String DEBACHARYA_COM = "debacharya.com";
+	static const String CONTACT_EMAIL = "debabratacse2020@klyuniv.ac.in";
+
+	static const String MAILTO_URL = "mailto:debabratacse2020@klyuniv.ac.in";
+	static const String GITHUB_KU_DATASET_URL = "https://github.com/kalyaniuniversity/COVID-19-Datasets";
+	static const String GITHUB_PROJECT_URL = "https://github.com/kalyaniuniversity/macaw";
 }

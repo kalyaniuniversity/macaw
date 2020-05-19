@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:macaw/controller/about_controller.dart';
 import 'package:macaw/controller/covid_map_controller.dart';
 import 'package:macaw/controller/dataset_controller.dart';
 import 'package:macaw/model/data_manager.dart';
@@ -118,6 +119,9 @@ class RootWidgetStore {
 		switch(index) {
 			case 0: Navigator.push(context, MaterialPageRoute(
 				builder: (context) => DatasetController()
+			)); break;
+			case 2: Navigator.push(context, MaterialPageRoute(
+				builder: (context) => AboutController()
 			)); break;
 			case 4:
 

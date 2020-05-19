@@ -12,7 +12,7 @@
 ///       - asset: fonts/Swan.ttf
 ///
 /// 
-/// * Font Awesome, Copyright (C) 2016 by Dave Gandy
+/// * Font Awesome 4, Copyright (C) 2016 by Dave Gandy
 ///         Author:    Dave Gandy
 ///         License:   SIL ()
 ///         Homepage:  http://fortawesome.github.com/Font-Awesome/
@@ -27,4 +27,5 @@ class Swan {
 
   static const IconData globe = IconData(0xe800, fontFamily: _kFontFam, fontPackage: _kFontPkg);
   static const IconData india = IconData(0xe801, fontFamily: _kFontFam, fontPackage: _kFontPkg);
+  static const IconData github = IconData(0xe802, fontFamily: _kFontFam, fontPackage: _kFontPkg);
 }
