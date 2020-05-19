@@ -14,7 +14,11 @@ import 'package:macaw/widget/quick_info_style.dart';
 class CovidWorldWidgetStore {
 
 	MacawWidgetStore _macawWidgetStore = MacawWidgetStore();
-	DateNotifierController _dateNotifierController = DateNotifierController(key: Key('2'), subscriber: DataSubscription.worldLatestDateSubscription);
+
+	DateNotifierController _dateNotifierController = DateNotifierController(
+		key: Key('2'),
+		subscriber: DataSubscription.worldLatestDateSubscription
+	);
 
 	Widget getView(BuildContext context) {
 		return ListView.separated(

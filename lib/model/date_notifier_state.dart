@@ -30,9 +30,10 @@ class DateNotifierState extends State<DateNotifierController> {
 	}
 
 	void _updateDate(String date) {
-		setState(() {
-			this._view.date = date;
-			this._subscriber.setDataByKey('date', date);
-		});
+		if(mounted)
+			setState(() {
+				this._view.date = date;
+				this._subscriber.setDataByKey('date', date);
+			});
 	}
 }

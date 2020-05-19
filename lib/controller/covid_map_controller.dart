@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:macaw/model/map_state.dart';
-import 'package:macaw/widget/covid_map_widget_store.dart';
 
 class CovidMapController extends StatefulWidget {
 

@@ -1,5 +1,3 @@
-import 'dart:io';
-
 import 'package:floating_action_bubble/floating_action_bubble.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_map/flutter_map.dart';
@@ -9,11 +7,9 @@ import 'package:macaw/model/coordinate.dart';
 import 'package:macaw/model/country.dart';
 import 'package:macaw/model/covid_data.dart';
 import 'package:macaw/model/data_manager.dart';
-import 'package:macaw/model/province.dart';
 import 'package:macaw/presentation/swan_icons.dart';
 import 'package:macaw/service/constant.dart';
 import 'package:macaw/service/macaw_palette.dart';
-import 'package:macaw/service/macaw_state_management.dart';
 
 class CovidMapWidgetStore {
 

@@ -3,12 +3,10 @@ import 'dart:io';
 import 'package:floating_action_bubble/floating_action_bubble.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_map/flutter_map.dart';
-import 'package:macaw/controller/covid_map_controller.dart';
-import 'package:macaw/presentation/swan_icons.dart';
-import 'package:macaw/service/constant.dart';
-import 'package:macaw/service/macaw_palette.dart';
-import 'package:macaw/widget/covid_map_widget_store.dart';
 import 'package:latlong/latlong.dart';
+import 'package:macaw/controller/covid_map_controller.dart';
+import 'package:macaw/service/constant.dart';
+import 'package:macaw/widget/covid_map_widget_store.dart';
 
 class MapState extends State<CovidMapController> with TickerProviderStateMixin {
 

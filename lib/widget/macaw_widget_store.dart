@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:macaw/service/constant.dart';
 import 'package:macaw/service/macaw_palette.dart';
 import 'package:macaw/widget/quick_info.dart';
 

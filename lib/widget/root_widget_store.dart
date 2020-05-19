@@ -8,7 +8,6 @@ import 'package:macaw/service/constant.dart';
 import 'package:macaw/service/macaw_palette.dart';
 import 'package:macaw/service/macaw_state_management.dart';
 import 'package:macaw/widget/covid_india_widget_store.dart';
-import 'package:macaw/widget/covid_map_widget_store.dart';
 import 'package:macaw/widget/covid_world_widget_store.dart';
 import 'package:macaw/widget/macaw_bottom_navigation_item.dart';
 
