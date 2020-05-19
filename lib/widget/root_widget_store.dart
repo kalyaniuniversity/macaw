@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:macaw/controller/covid_map_controller.dart';
+import 'package:macaw/controller/dataset_controller.dart';
 import 'package:macaw/model/data_manager.dart';
 import 'package:macaw/presentation/swan_icons.dart';
 import 'package:macaw/service/constant.dart';
@@ -115,6 +116,9 @@ class RootWidgetStore {
 
 	Future<void> _popupMenuItemSelected(BuildContext context, int index) async {
 		switch(index) {
+			case 0: Navigator.push(context, MaterialPageRoute(
+				builder: (context) => DatasetController()
+			)); break;
 			case 4:
 
 				MacawStateManagement.showLoadingProgressbar = true;
@@ -130,7 +134,7 @@ class RootWidgetStore {
 		switch(index) {
 			case 0:
 			case 1: MacawStateManagement.appViewFragmentStateChangeCallback(index); break;
-			case 2: Navigator.push(context, new MaterialPageRoute(
+			case 2: Navigator.push(context, MaterialPageRoute(
 				builder: (context) => CovidMapController()
 			)); break;
 			case 3: break;
