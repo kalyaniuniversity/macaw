@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:macaw/service/macaw_palette.dart';
@@ -27,9 +28,7 @@ class MacawWidgetStore {
 
 	Widget buildProgressIndicatorWidgetView() {
 		return Center(
-			child: CircularProgressIndicator(
-				strokeWidth: 2.0,
-			),
+			child: CupertinoActivityIndicator(),
 		);
 	}
 

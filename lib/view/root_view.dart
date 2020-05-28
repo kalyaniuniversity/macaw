@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:macaw/model/data_manager.dart';
 import 'package:macaw/service/macaw_palette.dart';
 import 'package:macaw/service/macaw_state_management.dart';

@@ -1,6 +1,5 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/svg.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:macaw/presentation/swan_icons.dart';
 import 'package:macaw/service/constant.dart';
@@ -12,6 +11,18 @@ class AboutController extends StatelessWidget {
 	@override
 	build(BuildContext context) {
 		return Scaffold(
+			floatingActionButton: FloatingActionButton.extended(
+				backgroundColor: MacawPalette.greyTintC,
+				label: Text(
+					'go back',
+					style: GoogleFonts.changa(),
+				),
+				icon: Icon(Icons.keyboard_arrow_left),
+				foregroundColor: MacawPalette.darkBlue,
+				onPressed: () {
+					Navigator.pop(context);
+				},
+			),
 			body: SingleChildScrollView(
 				padding: EdgeInsets.only(
 					top: 100.0,
@@ -116,7 +127,8 @@ class AboutController extends StatelessWidget {
 								text: TextSpan(
 									children: <TextSpan>[
 										TextSpan(
-											text: "Department of Computer Science along with Department of Statistics, University of Kalyani, has taken this initiative to develop an interactive site to view and interact with the daily available "
+											text: "Department of Computer Science along with Department of Statistics, University of Kalyani, has taken this initiative to develop an interactive mobile application to view and interact with the daily "
+												"available "
 												"nCoV-2019 pandemic from various sources. The timeseries data available from various sources are used, especially for students, researchers, data analysts, data engineers and other experts to create "
 												"interactive graphs, charts and plots to visualize the progress of different regions of India, and / or different countries around the globe and also to understand how various countries and / or regions within India are comparing against one another while fighting against this deadly disease.",
 											style: GoogleFonts.abel(

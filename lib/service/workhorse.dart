@@ -15,6 +15,10 @@ class Workhorse {
 		return Workhorse.isNumberic(result) ? double.parse(result) : 0;
 	}
 
+	static double getAvgTemperature(String value) {
+		return isNumberic(value) ? double.parse(value) : 0;
+	}
+
 	static String capitalizeFirstLetter(String value) {
 
 		if(value == null) return value;

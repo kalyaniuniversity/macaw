@@ -1,9 +1,11 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:macaw/controller/about_controller.dart';
 import 'package:macaw/controller/covid_map_controller.dart';
 import 'package:macaw/controller/dataset_controller.dart';
+import 'package:macaw/controller/news_controller.dart';
 import 'package:macaw/model/data_manager.dart';
 import 'package:macaw/presentation/swan_icons.dart';
 import 'package:macaw/service/constant.dart';
@@ -62,9 +64,20 @@ class RootWidgetStore {
 			navigationItems.add(this._buildBottomNavigationBarItem(item.getIconData(), item.getTitle()))
 		]);
 
-		navigationItems.add(this._buildBottomNavigationBarItemPopupOptions(context));
+		navigationItems.add(this._buildBottomNavigationMoreOptionsItem(context));
 
 		return navigationItems;
+	}
+
+	BottomNavigationBarItem _buildBottomNavigationMoreOptionsItem(BuildContext context) {
+		return BottomNavigationBarItem(
+			icon: Icon(Icons.short_text),
+			title: Text(
+				Constant.MORE,
+				style: GoogleFonts.changa(),
+			),
+			backgroundColor: MacawPalette.darkYellow
+		);
 	}
 
 	BottomNavigationBarItem _buildBottomNavigationBarItem(IconData iconData, String title) {
@@ -75,29 +88,6 @@ class RootWidgetStore {
 				style: GoogleFonts.changa(),
 			),
 			backgroundColor: MacawPalette.darkYellow
-		);
-	}
-
-	BottomNavigationBarItem _buildBottomNavigationBarItemPopupOptions(BuildContext context) {
-		return BottomNavigationBarItem(
-			icon: this._getPopupMenuButton(context),
-			title: Text(
-				Constant.MORE,
-				style: GoogleFonts.changa(),
-			),
-			backgroundColor: MacawPalette.darkYellow
-		);
-	}
-
-	Widget _getPopupMenuButton(BuildContext context) {
-		return PopupMenuButton(
-			itemBuilder: (ctx) => this.buildPopupMenu(ctx),
-			icon: Icon(Icons.short_text),
-			captureInheritedThemes: true,
-			enabled: true,
-			onSelected: (value) {
-				this._popupMenuItemSelected(context, value);
-			},
 		);
 	}
 
@@ -116,10 +106,17 @@ class RootWidgetStore {
 	}
 
 	Future<void> _popupMenuItemSelected(BuildContext context, int index) async {
+
+		if(index == null)
+			return;
+
 		switch(index) {
 			case 0: Navigator.push(context, MaterialPageRoute(
 				builder: (context) => DatasetController()
 			)); break;
+//			case 1: Navigator.push(context, MaterialPageRoute(
+//				builder: (context) => NewsController()
+//			)); break;
 			case 2: Navigator.push(context, MaterialPageRoute(
 				builder: (context) => AboutController()
 			)); break;
@@ -133,7 +130,7 @@ class RootWidgetStore {
 		}
 	}
 
-	void _onBottomNavigationBarItemTapped(BuildContext context, int index) {
+	void _onBottomNavigationBarItemTapped(BuildContext context, int index) async {
 
 		switch(index) {
 			case 0:
@@ -141,7 +138,25 @@ class RootWidgetStore {
 			case 2: Navigator.push(context, MaterialPageRoute(
 				builder: (context) => CovidMapController()
 			)); break;
-			case 3: break;
+			case 3:
+
+				final RenderBox button = context.findRenderObject();
+				final RenderBox overlay = Overlay.of(context).context.findRenderObject();
+				final RelativeRect position = RelativeRect.fromRect(
+					Rect.fromPoints(
+						button.localToGlobal(button.size.bottomCenter(Offset(0, 0)), ancestor: overlay),
+						button.localToGlobal(button.size.bottomRight(Offset.zero), ancestor: overlay)
+					),
+					Offset.zero & overlay.size,
+				);
+
+				showMenu(
+					context: context,
+					position: position,
+					items: this.buildPopupMenu(context)
+				).then((value) => this._popupMenuItemSelected(context, value));
+
+				break;
 		}
 	}
 

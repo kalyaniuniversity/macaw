@@ -10,21 +10,19 @@ import 'package:macaw/widget/macaw_widget_store.dart';
 
 class NetworkService {
 
-	static MacawWidgetStore _widgetStore = MacawWidgetStore();
-
 	static Future<String> getResponseFromRemoteLocation(BuildContext context, String url, { bool externalErrorManager = false }) async {
 
 		if(!await NetworkService._isNetworkConnected())
 			return NetworkService._networkErrorManagementDecider(externalErrorManager, context);
 
-		http.Response response = await NetworkService._hitRemoteLocation(url);
+		http.Response response = await NetworkService.hitRemoteLocation(url);
 
 		return (response.statusCode == 200)
 			? response.body
 			: NetworkService._networkErrorManagementDecider(externalErrorManager, context);
 	}
 
-	static Future<http.Response> _hitRemoteLocation(String url) {
+	static Future<http.Response> hitRemoteLocation(String url) {
 		return http.get(url);
 	}
 

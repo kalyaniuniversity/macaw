@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:macaw/model/dataset.dart';
 import 'package:macaw/model/datasets.dart';
@@ -10,7 +11,22 @@ class DatasetController extends StatelessWidget {
 	@override
 	build(BuildContext context) {
 		return Scaffold(
+			floatingActionButton: FloatingActionButton.extended(
+				backgroundColor: MacawPalette.greyTintC,
+				label: Text(
+					'go back',
+					style: GoogleFonts.changa(),
+				),
+				icon: Icon(Icons.keyboard_arrow_left),
+				foregroundColor: MacawPalette.darkBlue,
+				onPressed: () {
+					Navigator.pop(context);
+				},
+			),
 			body: ListView.separated(
+				padding: EdgeInsets.only(
+					bottom: 100.0
+				),
 				separatorBuilder: (context, index) => Divider(
 					height: 5,
 					color: Colors.white,
@@ -61,7 +77,10 @@ class DatasetController extends StatelessWidget {
 				children: <Widget>[
 					ListTile(
 						contentPadding: EdgeInsets.all(10.0),
-						leading: Icon(Icons.apps),
+						leading: SvgPicture.asset(
+							"assets/images/github.svg",
+							height: 30.0,
+						),
 						title: Text(
 							dataset.title,
 							style: GoogleFonts.changa(

@@ -1,6 +1,7 @@
 import 'package:floating_action_bubble/floating_action_bubble.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_map/flutter_map.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:latlong/latlong.dart';
 import 'package:macaw/model/coordinate.dart';
@@ -134,7 +135,7 @@ class CovidMapWidgetStore {
 
 			case Constant.INDIA_MAP_DATA:
 
-				 for(int i = 0; i < _indiaConfirmed.countries[0].provinces.length; i++)
+				 for(int i = 0; i < (_indiaConfirmed.countries[0].provinces.length - 1); i++)
 					 markers.add(this._buildMarker(
 						 context,
 						 _indiaConfirmed.countries[0].provinces[i].getNameLabel(),
@@ -178,11 +179,11 @@ class CovidMapWidgetStore {
 			point: LatLng(latitude, longitude),
 			builder: (ctx) => InkWell(
 				child: Container(
-					child: Icon(
-						Icons.location_on,
-						color: MacawPalette.darkYellow,
-						size: 40.0,
+					child: SvgPicture.asset(
+						"assets/images/virus.svg",
+						height: 30.0,
 					),
+
 				),
 				onTap: () {
 					Scaffold.of(context).showSnackBar(

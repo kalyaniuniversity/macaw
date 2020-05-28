@@ -169,7 +169,7 @@ class DataManager {
 
 				List<List<dynamic>> rowsAsListOfValues = const CsvToListConverter().convert(
 					rawData,
-					eol: world ? '\n' : '\r\n'
+					eol: '\n'
 				);
 
 				if(writeToFile) DataManager._persistence.writeCovidCSV(rawData, csvFileType);
@@ -202,7 +202,7 @@ class DataManager {
 			String longitude = row[3].toString();
 			double perCapitaIncome = Workhorse.getNumberFromCommaSeparatedString(row[4].toString());
 			double population = Workhorse.getNumberFromCommaSeparatedString(row[5].toString());
-			double avgTemperature = double.parse(row[6].toString());
+			double avgTemperature = Workhorse.getAvgTemperature(row[6].toString());
 			List<Timeseries> timeseries = Workhorse.prepareTimeseries(row, covidData.headers, 7);
 			Coordinate coordinates = new Coordinate(latitude, longitude);
 			Province province = Province(provinceName, Constant.INDIA, coordinates, timeseries);

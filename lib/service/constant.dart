@@ -40,6 +40,7 @@ class Constant {
 	static const String WORLD_CONFIRMED_CASES_DATASET_URL = "https://raw.githubusercontent.com/CSSEGISandData/COVID-19/master/csse_covid_19_data/csse_covid_19_time_series/time_series_covid19_confirmed_global.csv";
 	static const String WORLD_RECOVERY_CASES_DATASET_URL = "https://raw.githubusercontent.com/CSSEGISandData/COVID-19/master/csse_covid_19_data/csse_covid_19_time_series/time_series_covid19_recovered_global.csv";
 	static const String WORLD_DECEASED_CASES_DATASET_URL = "https://raw.githubusercontent.com/CSSEGISandData/COVID-19/master/csse_covid_19_data/csse_covid_19_time_series/time_series_covid19_deaths_global.csv";
+	static const String NEWS_URL = "https://raw.githubusercontent.com/onclave/prosopikos/master/raw/covid_news.json";
 
 	static const String INDIA_CONFIRMED_DATALOAD_FAILURE_MESSAGE = "The data for India's COVID-19 confirmed cases could not be loaded. This could be due to an internet connection failure or the server may not be available now.";
 	static const String INDIA_RECOVERY_DATALOAD_FAILURE_MESSAGE = "The data for India's COVID-19 recovery cases could not be loaded. This could be due to an internet connection failure or the server may not be available now.";

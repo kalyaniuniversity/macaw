@@ -45,11 +45,9 @@ class MapState extends State<CovidMapController> with TickerProviderStateMixin {
 
 		List<Bubble> items = [
 			this._mapWidgetStore.buildWorldMapOption(this._showWorldMap),
-			this._mapWidgetStore.buildIndiaMapOption(this._showIndianMap)
+			this._mapWidgetStore.buildIndiaMapOption(this._showIndianMap),
+			this._mapWidgetStore.buildGoBackOption(context)
 		];
-
-		if(Platform.isIOS)
-			items.add(this._mapWidgetStore.buildGoBackOption(context));
 
 		return items;
 	}
