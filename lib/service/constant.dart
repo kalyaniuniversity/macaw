@@ -12,6 +12,12 @@ class Constant {
 	static const String DISMISS = "Dismiss";
 	static const String OKAY = "Okay";
 	static const String GO_BACK = "Go Back";
+	static const String DATE = "date";
+	static const String INDIA_SMALL = "india";
+	static const String WORLD_SMALL = "world";
+	static const String HEADING = "heading";
+	static const String DESCRIPTION = "description";
+	static const String SOURCE = "source";
 	static const String KU = "University of Kalyani";
 	static const String CSE = "Dept. of Computer Science & Engineering";
 	static const String TOTAL_INFECTED = "Total Infected";
@@ -61,6 +67,7 @@ class Constant {
 	static const String COVID_WORLD_CONFIRMED_CSV_FILENAME = "covidworldconfirmed.csv";
 	static const String COVID_WORLD_RECOVERED_CSV_FILENAME = "covidworldrecovered.csv";
 	static const String COVID_WORLD_DECEASED_CSV_FILENAME = "covidworlddeceased.csv";
+	static const String COVID_NEWS_JSON_FILENAME = "covidnews.json";
 
 	static const int FILE_TYPE_INDIA_CONFIRMED = 1;
 	static const int FILE_TYPE_INDIA_RECOVERED = 2;

@@ -114,9 +114,9 @@ class RootWidgetStore {
 			case 0: Navigator.push(context, MaterialPageRoute(
 				builder: (context) => DatasetController()
 			)); break;
-//			case 1: Navigator.push(context, MaterialPageRoute(
-//				builder: (context) => NewsController()
-//			)); break;
+			case 1: Navigator.push(context, MaterialPageRoute(
+				builder: (context) => NewsController()
+			)); break;
 			case 2: Navigator.push(context, MaterialPageRoute(
 				builder: (context) => AboutController()
 			)); break;

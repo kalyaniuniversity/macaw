@@ -41,6 +41,22 @@ class FileIO {
 		}
 	}
 
+	Future<String> readNewsJSON() async {
+		try {
+
+			File file = await this._covidNewsLocalFile;
+
+			if(!await file.exists()) return null;
+			else return file.readAsString();
+		} catch(e) {
+			return null;
+		}
+	}
+
+	Future<void> writeNewsJSON(String contents) async {
+		await this._fileWriter(await this._covidNewsLocalFile, contents);
+	}
+
 	Future<void> _fileWriter(File file, String contents) async {
 		await file.writeAsString(contents);
 	}
@@ -71,5 +87,9 @@ class FileIO {
 
 	Future<File> get _covidWorldDeceasedLocalFile async {
 		return File(await this._localFilePath + '/' + Constant.COVID_WORLD_DECEASED_CSV_FILENAME);
+	}
+
+	Future<File> get _covidNewsLocalFile async {
+		return File(await this._localFilePath + "/" + Constant.COVID_NEWS_JSON_FILENAME);
 	}
 }
