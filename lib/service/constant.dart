@@ -1,6 +1,6 @@
 class Constant {
 
-	static const String MATERIAL_APP_TITLE = "COVID-19 Analysis";
+	static const String MATERIAL_APP_TITLE = "Macaw";
 	static const String MACAW = "macaw";
 	static const String INDIA = "India";
 	static const String WORLD = "World";
@@ -60,6 +60,7 @@ class Constant {
 
 	static const String ASSET_TAJ_MAHAL_SVG = "assets/images/taj-mahal.svg";
 	static const String ASSET_WORLD_SVG = "assets/images/world.svg";
+	static const String ASSET_LOGO_64 = "assets/images/bird-64.png";
 
 	static const String COVID_INDIA_CONFIRMED_CSV_FILENAME = "covidindiaconfirmed.csv";
 	static const String COVID_INDIA_RECOVERED_CSV_FILENAME = "covidindiarecovered.csv";
@@ -85,4 +86,9 @@ class Constant {
 	static const String MAILTO_URL = "mailto:debabratacse2020@klyuniv.ac.in";
 	static const String GITHUB_KU_DATASET_URL = "https://github.com/kalyaniuniversity/COVID-19-Datasets";
 	static const String GITHUB_PROJECT_URL = "https://github.com/kalyaniuniversity/macaw";
+
+	static const String ROUTE_ABOUT = "/about";
+	static const String ROUTE_DATASETS = "/datasets";
+	static const String ROUTE_NEWS = "/news";
+	static const String ROUTE_MAP = "/map";
 }
