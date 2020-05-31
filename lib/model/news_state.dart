@@ -118,20 +118,6 @@ class NewsState extends State<NewsController> {
 				)
 			],
 		);
-
-		return Center(
-			child: Text(
-				date,
-				style: GoogleFonts.robotoMono(
-					textStyle: TextStyle(
-						fontWeight: FontWeight.bold,
-						fontSize: 16.0,
-						letterSpacing: 2.0,
-						color: MacawPalette.roseannaGradientStart
-					)
-				),
-			),
-		);
 	}
 
 	Widget _getNewsCard(int index) {

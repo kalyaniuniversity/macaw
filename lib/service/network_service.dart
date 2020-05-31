@@ -10,6 +10,35 @@ import 'package:macaw/widget/macaw_widget_store.dart';
 
 class NetworkService {
 
+	static Future<String> fetchResponse(String url) async {
+
+		if(!await NetworkService._isNetworkConnected())
+			throw NetworkError(NetworkError.NO_INTERNET_CONNECTION);
+
+		http.Response response = await NetworkService.hitRemoteLocation(url);
+
+		return (response.statusCode == 200)
+			? response.body
+			: throw NetworkError(response.statusCode);
+	}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+	///////////////////// refactor to not use context at all
+
 	static Future<String> getResponseFromRemoteLocation(BuildContext context, String url, { bool externalErrorManager = false }) async {
 
 		if(!await NetworkService._isNetworkConnected())
@@ -49,6 +78,26 @@ class NetworkService {
 			return false;
 		} catch(e) {
 			return false;
+		}
+	}
+}
+
+class NetworkError extends Error {
+
+	static const int NO_INTERNET_CONNECTION = 900;
+	static const int CODE_404 = 404;
+
+	final int _code;
+
+	NetworkError(this._code);
+
+	int get code => this._code;
+
+	static String resolveErrorCode(int code) {
+		switch(code) {
+			case NetworkError.NO_INTERNET_CONNECTION: return "It seems like you are not connected to the internet!";
+			case NetworkError.CODE_404: return "The requested could not be found at the location.";
+			default: return "Something went wrong!";
 		}
 	}
 }

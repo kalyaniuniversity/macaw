@@ -5,6 +5,8 @@ import 'package:path_provider/path_provider.dart';
 
 class FileIO {
 
+	static FileIO persistence = FileIO();
+
 	Future<String> readCovidCSV(int type) async {
 		try {
 

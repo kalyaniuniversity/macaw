@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:macaw/bloc/news/bloc.dart';
+import 'package:macaw/data/news_repository.dart';
 import 'package:macaw/service/constant.dart';
 import 'package:macaw/service/macaw_theme.dart';
 import 'package:macaw/view/about.dart';
@@ -22,7 +24,7 @@ class MacawApp extends StatelessWidget {
 				Constant.ROUTE_ABOUT: (context) => About(),
 				Constant.ROUTE_DATASETS: (context) => DatasetView(),
 				Constant.ROUTE_NEWS: (context) => BlocProvider(
-					create: (context) => null,
+					create: (context) => NewsBloc(NewsData()),
 					child: NewsView(),
 				)
 			},

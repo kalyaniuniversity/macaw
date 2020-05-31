@@ -5,11 +5,9 @@ abstract class NewsEvent extends Equatable {
 	const NewsEvent();
 }
 
-class GetNews extends NewsEvent {
+class GetNewsChunks extends NewsEvent {
 
-	final List<NewsChunk> news;
-
-	const GetNews(this.news);
+	const GetNewsChunks();
 
 	@override
 	List<Object> get props => [];
